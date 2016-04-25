@@ -17,17 +17,17 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-	margin: 0;
+    margin: 0;
 }
 
 button {
-	border: none;
+    border: none;
 }
 
 a, button {
-	&:hover {
-		cursor: pointer;
-	}
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 @mixin clearfix {
@@ -46,80 +46,80 @@ a, button {
 }
 
 .brexit {
-	margin-top: $baseline * 2;
-	padding: 0 $gutter $baseline $gutter;
-	background-color: colour(neutral-7);
+    margin-top: $baseline * 2;
+    padding: 0 $gutter $baseline $gutter;
+    background-color: colour(neutral-7);
 }
 
 .brexit__header {
-	@include clearfix;
+    @include clearfix;
 
-	$header-level: 3;
-	$line-height: get-line-height(header, $header-level);
-	$padding-vertical: $baseline;
-	$padding-horizontal: $gutter;
-	$height: $line-height + $padding-vertical * 2;
+    $header-level: 3;
+    $line-height: get-line-height(header, $header-level);
+    $padding-vertical: $baseline;
+    $padding-horizontal: $gutter;
+    $height: $line-height + $padding-vertical * 2;
 
-	@include fs-header($header-level);
-	position: relative;
-	line-height: $height;
-	vertical-align: center;
-	top: -($height / 2);
+    @include fs-header($header-level);
+    position: relative;
+    line-height: $height;
+    vertical-align: center;
+    top: -($height / 2);
 
-	.brexit__header__text {
-		@include fs-header($header-level);
-		padding: $padding-vertical $padding-horizontal;
-		color: #ffffff;
-		background-color: colour(guardian-brand-dark);
-		float: left;
-		clip-path: polygon(0 100%, 100% 85%, 100% 0, 0 0);
-		-webkit-clip-path: polygon(0 100%, 100% 85%, 100% 0, 0 0);
-	}
-	.brexit__header__logo {
-		float: right;
-	}
+    .brexit__header__text {
+        @include fs-header($header-level);
+        padding: $padding-vertical $padding-horizontal;
+        color: #ffffff;
+        background-color: colour(guardian-brand-dark);
+        float: left;
+        clip-path: polygon(0 100%, 100% 85%, 100% 0, 0 0);
+        -webkit-clip-path: polygon(0 100%, 100% 85%, 100% 0, 0 0);
+    }
+    .brexit__header__logo {
+        float: right;
+    }
 }
 .brexit__button {
-	@include fs-textSans(4);
-	$line-height: get-line-height(textSans, 4);
-	// $padding-vertical: $baseline;
-	// $padding-horizontal: $gutter;
-	// $height: $line-height + $padding-vertical * 2;
+    @include fs-textSans(4);
+    $line-height: get-line-height(textSans, 4);
+    // $padding-vertical: $baseline;
+    // $padding-horizontal: $gutter;
+    // $height: $line-height + $padding-vertical * 2;
 
-	// height: $height;
-	// line-height: $line-height;
-	display: inline-block;
-	vertical-align: middle;
-	font-weight: 700;
-	background-color: colour(guardian-brand-dark);
-	border-radius: $gutter * 2;
-	padding: 0 $gutter;
-	color: #ffffff;
-	svg {
-		display: inline-block;
-		vertical-align: middle;
-		fill: #ffffff;
-		height: $line-height;
-		width: auto;
-	}
+    // height: $height;
+    // line-height: $line-height;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 700;
+    background-color: colour(guardian-brand-dark);
+    border-radius: $gutter * 2;
+    padding: 0 $gutter;
+    color: #ffffff;
+    svg {
+        display: inline-block;
+        vertical-align: middle;
+        fill: #ffffff;
+        height: $line-height;
+        width: auto;
+    }
 
-	&:hover {
-		background-color: darken(colour(guardian-brand-dark), 10%);
-	}
+    &:hover {
+        background-color: darken(colour(guardian-brand-dark), 10%);
+    }
 }
 .brexit__feedback {
-	@include fs-textSans(4);
-	text-align: right;
+    @include fs-textSans(4);
+    text-align: right;
 }
 .brexit__title {
-	@include fs-bodyHeading(4);
+    @include fs-bodyHeading(4);
 }
 .brexit__number {
-	@include fs-header(5);
-	color: colour(news-main-2);
-	margin-top: $baseline;
+    @include fs-header(5);
+    color: colour(news-main-2);
+    margin-top: $baseline;
 }
 p {
-	@include fs-textSans(4);
-	margin: 0;
+    @include fs-textSans(4);
+    margin: 0;
 }
