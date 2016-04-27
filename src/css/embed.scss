@@ -107,6 +107,11 @@ a, button {
         background-color: darken(colour(guardian-brand-dark), 10%);
     }
 }
+.brexit__button--dislike {
+    svg {
+        transform: rotate(180deg);
+    }
+}
 .brexit__feedback {
     @include fs-textSans(4);
     text-align: right;

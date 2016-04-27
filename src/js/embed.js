@@ -22,14 +22,25 @@ window.init = function init(el, config) {
                 });
                 el.querySelector('.reasons').innerHTML = htmlArray.join("\n");
             } else {
-                console.log("bad JSON response");
+                console.log('bad JSON response');
                 console.log(resp);
             }
         }
     });
 
-    el.querySelector('.js-like').addEventListener('click', ev => {
-        let feedback = ev.currentTarget.parentNode;
-        feedback.innerHTML = thankYouHTML;
-    });
+    function arr(nodeList) {
+        return [].slice.apply(nodeList);
+    }
+
+    arr(el.querySelectorAll('.js-feedback')).forEach(el => el.addEventListener('click', ev => {
+        let el = ev.currentTarget;
+        let feedback = el.parentNode;
+        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/, el.getAttribute('data-survey-href'));
+    }));
+
+    arr(el.querySelectorAll('[data-track]')).forEach(el => el.addEventListener('click', ev => {
+        let trackingCode = ev.currentTarget.getAttribute('data-track');
+        console.log('tracking event ' + trackingCode);
+        _satellite.track(trackingCode);
+    }))
 };
