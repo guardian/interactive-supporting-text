@@ -24,6 +24,10 @@ button {
     border: none;
 }
 
+a {
+    color: colour(guardian-brand);
+}
+
 a, button {
     &:hover {
         cursor: pointer;
@@ -106,7 +110,7 @@ a, button {
         display: inline-block;
         vertical-align: middle;
         fill: #ffffff;
-        height: $line-height;
+        height: 17px;
         width: auto;
     }
 
@@ -121,10 +125,12 @@ a, button {
 }
 .brexit__feedback {
     @include fs-textSans(4);
+    margin-top: $baseline;
     text-align: right;
 }
 .brexit__title {
     @include fs-bodyHeading(4);
+    font-size: 24px;
 }
 .brexit__number {
     @include fs-header(5);
@@ -133,5 +139,6 @@ a, button {
 }
 p {
     @include fs-textSans(4);
+    line-height: 20px;
     margin: 0;
 }
