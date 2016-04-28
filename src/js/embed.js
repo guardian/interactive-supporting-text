@@ -10,7 +10,8 @@ window.init = function init(el, config) {
     el.innerHTML = embedHTML;
 
     reqwest({
-        url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+        // TODO: change to prod path in production
+        url: 'http://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
         success: (resp) => {
@@ -21,6 +22,22 @@ window.init = function init(el, config) {
                     return reasonHTML.replace(/%youSay%/g, reason.youSay).replace(/%theySay%/g, reason.theySay);
                 });
                 el.querySelector('.reasons').innerHTML = htmlArray.join("\n");
+
+                let title = reasonsToLeave[0].title;
+                if (title) {
+                    let e = el.querySelector('.brexit__title');
+                    e.innerHTML = e.innerHTML.replace(/%title%/g, title);
+                }
+                let articleLinkText = reasonsToLeave[0].articleLinkText;
+                if (articleLinkText) {
+                    let e = el.querySelector('.brexit__button');
+                    e.innerHTML = e.innerHTML.replace(/%articleLinkText%/g, articleLinkText);
+                }
+                let feedbackQuestion = reasonsToLeave[0].feedbackQuestion;
+                if (feedbackQuestion) {
+                    let e = el.querySelector('.brexit__feedback');
+                    e.innerHTML = e.innerHTML.replace(/%feedbackQuestion%/g, feedbackQuestion);
+                }
             } else {
                 console.log('bad JSON response');
                 console.log(resp);

@@ -78,6 +78,13 @@ a, button {
     .brexit__header__logo {
         float: right;
     }
+
+    .brexit__badge {
+        float: left;
+    }
+    .brexit__logo {
+        float: right;
+    }
 }
 .brexit__button {
     @include fs-textSans(4);
