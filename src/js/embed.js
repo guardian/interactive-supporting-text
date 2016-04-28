@@ -11,7 +11,7 @@ window.init = function init(el, config) {
 
     reqwest({
         // TODO: change to prod path in production
-        url: 'http://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+        url: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
         success: (resp) => {
