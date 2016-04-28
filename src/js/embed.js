@@ -21,7 +21,7 @@ window.init = function init(el, config) {
         success: (resp) => {
             let reasonsToLeave = resp && resp.sheets && resp.sheets.reasonsToLeave;
             console.log(reasonsToLeave);
-            
+
             if (reasonsToLeave && reasonsToLeave.length) {
                 let htmlArray = reasonsToLeave.map(reason => {
                     return reasonHTML.replace(/%youSay%/g, reason.youSay).replace(/%theySay%/g, reason.theySay);
@@ -44,7 +44,7 @@ window.init = function init(el, config) {
     q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
         let el = ev.currentTarget;
         let feedback = el.parentNode;
-        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/, el.getAttribute('data-survey-href'));
+        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, el.getAttribute('data-survey-href'));
     }));
 
     q('[data-track]').forEach(el => el.addEventListener('click', ev => {
