@@ -4,6 +4,22 @@ import embedHTML from './text/embed.html!text'
 import thankYouHTML from './text/thankYou.html!text'
 import reasonHTML from './text/reason.html!text'
 
+import reasonsTemplate from './text/reasons.dot.html!text'
+
+import dot from 'olado/doT'
+
+var variants = {
+    reasonsToLeave: {
+       // TODO: change to prod path in production
+        dataSource: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+        template: reasonsTemplate
+    },
+    reasonsToStay: {
+        dataSource: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+        template: reasonsTemplate
+    }
+};
+
 window.init = function init(el, config) {
     function q(selectorString) {
         return [].slice.apply(el.querySelectorAll(selectorString));
@@ -11,35 +27,34 @@ window.init = function init(el, config) {
 
     iframeMessenger.enableAutoResize();
 
-    el.innerHTML = embedHTML;
+    // el.innerHTML = embedHTML;
 
-    reqwest({
-        // TODO: change to prod path in production
-        url: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
-        type: 'json',
-        crossOrigin: false,
-        success: (resp) => {
-            let reasonsToLeave = resp && resp.sheets && resp.sheets.reasonsToLeave;
-            console.log(reasonsToLeave);
+    var variantName = window.location.hash.replace('#', '');
+    var variant = variantName && variants[variantName];
+    if (variant) {
+        reqwest({
+            url: variant.dataSource,
+            type: 'json',
+            crossOrigin: false,
+            success: (resp) => {
+                let data = resp && resp.sheets && resp.sheets[variantName];
+                let metaData = resp && resp.sheets && resp.sheets[variantName+'Meta'];
 
-            if (reasonsToLeave && reasonsToLeave.length) {
-                let htmlArray = reasonsToLeave.map(reason => {
-                    return reasonHTML.replace(/%youSay%/g, reason.youSay).replace(/%theySay%/g, reason.theySay);
-                });
-                el.querySelector('.reasons').innerHTML = htmlArray.join("\n");
-
-                ['title', 'articleLinkText', 'feedbackQuestion'].forEach(field => {
-                    let text = reasonsToLeave[0][field];
-                    if (text) {
-                        q('[data-source-'+field+']').forEach(el => el.innerHTML = text);
-                    }
-                })
-            } else {
-                console.log('bad JSON response');
-                console.log(resp);
+                if (data && data.length && metaData && metaData.length) {
+                    let fn = dot.template(variant.template);
+                    el.innerHTML = fn({
+                        data: data,
+                        metaData: metaData[0]
+                    });
+                } else {
+                    console.log('bad JSON response');
+                    console.log(resp);
+                }
             }
-        }
-    });
+        });
+    } else {
+        console.log('Invalid variant '+variantName);
+    }
 
     q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
         let el = ev.currentTarget;

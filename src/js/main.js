@@ -5,7 +5,6 @@ import share from './lib/share'
 var shareFn = share('Interactive title', 'http://gu.com/p/URL', '#Interactive');
 
 export function init(el, context, config, mediator) {
-    alert('main');
     el.innerHTML = mainHTML.replace(/%assetPath%/g, config.assetPath);
     
     [].slice.apply(el.querySelectorAll('.interactive-share')).forEach(shareEl => {
