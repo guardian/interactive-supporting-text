@@ -29,8 +29,8 @@ window.init = function init(el, config) {
 
     // el.innerHTML = embedHTML;
 
-    var variantName = window.location.hash.replace('#', '');
-    var variant = variantName && variants[variantName];
+    var variantName = window.location.hash.replace('#', '') || 'reasonsToLeave';
+    var variant = variants[variantName];
     if (variant) {
         reqwest({
             url: variant.dataSource,

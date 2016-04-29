@@ -1,14 +1,12 @@
 <div class="brexit">
     <div class="brexit__header">
-        <!-- <h1 class="brexit__header__text">Brexit companion</h1> -->
-        <!-- <div class="brexit__header__logo">LOGO</div> -->
         <img class="brexit__badge" alt="Brexit Companion" src="https://uploads.guim.co.uk/2016/04/27/Brexit-header-article.png"/>
         <img class="brexit__logo" src="https://uploads.guim.co.uk/2016/04/27/lightbulb_blk_72x60_opt.png"/>
     </div>  
     <h2 class="brexit__title">{{=it.metaData.title}}</h2>
-    <h3 class="brexit__number">1</h3>
     <div class="reasons">
         {{~it.data :reason:index}}
+        <h3 class="brexit__number">{{=index+1}}</h3>
         <div class="reason">
             <p>
                 <span class="u-bold">They say:</span>
