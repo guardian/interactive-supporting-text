@@ -29,21 +29,33 @@ window.init = function init(el, config) {
         params[keyVal[0]] = keyVal[1];
     });
 
-    var sheet = params['sheet'];
-    var row = parseInt(params['row']) - 2;
+    var sheet = params.sheet;
+    var id = params.id;
     reqwest({
         // TODO: CHANGE TO PROD URL
         url: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
         success: (resp) => {
-            var data = resp && resp.sheets && resp.sheets[sheet];
+            var rows = resp && resp.sheets && resp.sheets[sheet];
+            var row;
 
-            if (data && data[row]) {
+            if (rows && rows.length) {
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].id === id) {
+                        row = rows[i];
+                    }
+                }
+
+                if (!row) {
+                    console.log('row with id ' + id + ' not found');
+                    return;
+                }
+
                 let fn = dot.template(questionAndAnswer);
-                let trackingCode = 'brexit__' + sheet + '__' + data[row].id;
+                let trackingCode = 'brexit__' + sheet + '__' + row.id;
                 el.innerHTML = fn({
-                    data: data[row],
+                    data: row,
                     trackingCode: {
                         like: trackingCode + '__like',
                         dislike: trackingCode + '__dislike'
