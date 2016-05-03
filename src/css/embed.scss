@@ -182,7 +182,7 @@ a, button {
         transform: rotate(-2deg);
     }
 }
-p {
+p, ol {
     @include fs-textSans(4);
     line-height: 20px;
     margin: 0;

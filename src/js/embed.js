@@ -17,12 +17,6 @@ function bindEventHandlers() {
         let feedback = el.parentNode;
         feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, el.getAttribute('data-survey-href'));
     }));
-
-    q('[data-track]').forEach(el => el.addEventListener('click', ev => {
-        let trackingCode = ev.currentTarget.getAttribute('data-track');
-        console.log('tracking event ' + trackingCode);
-        _satellite.track(trackingCode);
-    }))
 }
 
 window.init = function init(el, config) {
@@ -38,6 +32,7 @@ window.init = function init(el, config) {
     var sheet = params['sheet'];
     var row = parseInt(params['row']) - 2;
     reqwest({
+        // TODO: CHANGE TO PROD URL
         url: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
@@ -46,8 +41,13 @@ window.init = function init(el, config) {
 
             if (data && data[row]) {
                 let fn = dot.template(questionAndAnswer);
+                let trackingCode = 'brexit__' + sheet + '__' + data[row].id;
                 el.innerHTML = fn({
-                    data: data[row]
+                    data: data[row],
+                    trackingCode: {
+                        like: trackingCode + '__like',
+                        dislike: trackingCode + '__dislike'
+                    }
                 });
 
                 bindEventHandlers();
