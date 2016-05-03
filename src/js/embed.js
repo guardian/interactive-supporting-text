@@ -20,11 +20,26 @@ var variants = {
     }
 };
 
-window.init = function init(el, config) {
-    function q(selectorString) {
-        return [].slice.apply(el.querySelectorAll(selectorString));
-    }
 
+function q(selectorString) {
+    return [].slice.apply(document.querySelectorAll(selectorString));
+}
+
+function bindEventHandlers() {
+    q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
+        let el = ev.currentTarget;
+        let feedback = el.parentNode;
+        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, el.getAttribute('data-survey-href'));
+    }));
+
+    q('[data-track]').forEach(el => el.addEventListener('click', ev => {
+        let trackingCode = ev.currentTarget.getAttribute('data-track');
+        console.log('tracking event ' + trackingCode);
+        _satellite.track(trackingCode);
+    }))
+}
+
+window.init = function init(el, config) {
     iframeMessenger.enableAutoResize();
 
     // el.innerHTML = embedHTML;
@@ -46,6 +61,8 @@ window.init = function init(el, config) {
                         data: data,
                         metaData: metaData[0]
                     });
+
+                    bindEventHandlers();
                 } else {
                     console.log('bad JSON response');
                     console.log(resp);
@@ -55,16 +72,5 @@ window.init = function init(el, config) {
     } else {
         console.log('Invalid variant '+variantName);
     }
-
-    q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
-        let el = ev.currentTarget;
-        let feedback = el.parentNode;
-        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, el.getAttribute('data-survey-href'));
-    }));
-
-    q('[data-track]').forEach(el => el.addEventListener('click', ev => {
-        let trackingCode = ev.currentTarget.getAttribute('data-track');
-        console.log('tracking event ' + trackingCode);
-        _satellite.track(trackingCode);
-    }))
 };
+
