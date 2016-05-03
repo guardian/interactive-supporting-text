@@ -1,8 +1,6 @@
 import iframeMessenger from 'guardian/iframe-messenger'
 import reqwest from 'reqwest'
-import embedHTML from './text/embed.html!text'
 import thankYouHTML from './text/thankYou.html!text'
-import reasonHTML from './text/reason.html!text'
 
 // import reasonsTemplate from './text/reasons.dot.html!text'
 import questionAndAnswer from './text/questionAndAnswer.dot.html!text'
