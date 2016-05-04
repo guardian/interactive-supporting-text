@@ -32,8 +32,7 @@ window.init = function init(el, config) {
     var sheet = params.sheet;
     var id = params.id;
     reqwest({
-        // TODO: CHANGE TO PROD URL
-        url: 'https://interactive.guim.co.uk/docsdata-test/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+        url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
         success: (resp) => {
