@@ -28,7 +28,7 @@ button {
 }
 
 a {
-    color: colour(guardian-brand);
+    color: colour(news-support-1);
 }
 
 a, button {
@@ -53,82 +53,51 @@ a, button {
 }
 
 .brexit {
-    margin: $baseline*2 0 $baseline 0;
-    padding: 0 $gutter $baseline $gutter;
-    background-color: colour(neutral-7);
+    margin: $baseline*1.5 0;
+    padding: $baseline/2 $gutter/2;
+    background-color: colour(news-main-1);
+    color: #ffffff;
     position: relative;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        background-color: colour(news-main-2);
+        width: 94%;
+        height: 100%;
+        top: 0;
+        left: 3%;
+        transform: rotate(-5deg);
+        z-index: -1;
+    }
 }
 
 .brexit__header {
-    @include clearfix;
-
-    $header-level: 3;
-    $line-height: get-line-height(header, $header-level);
-    $padding-vertical: $baseline;
-    $padding-horizontal: $gutter;
-    $height: $line-height + $padding-vertical * 2;
-
-    @include fs-header($header-level);
-    position: relative;
-    line-height: $height;
-    vertical-align: center;
-    top: -($height / 2);
-
-    .brexit__header__text {
-        @include fs-header($header-level);
-        padding: $padding-vertical $padding-horizontal;
-        color: #ffffff;
-        background-color: colour(guardian-brand-dark);
-        float: left;
-        clip-path: polygon(0 100%, 100% 85%, 100% 0, 0 0);
-        -webkit-clip-path: polygon(0 100%, 100% 85%, 100% 0, 0 0);
-    }
-    .brexit__header__logo {
-        float: right;
-    }
-
-    .brexit__badge {
-        float: left;
-        width: 144px;
-        position: absolute;
-        top: 6px;
-    }
-    .brexit__logo {
-        float: right;
-        width: 46px;
-        transform: rotateY(180deg);
-    }
+    @include fs-header(3);
+    padding-bottom: $baseline * 1.5;
 }
 .brexit__button {
-    @include fs-textSans(4);
-    $line-height: get-line-height(textSans, 4);
-
-    font-size: 13px;
-    line-height: 18px;
-    padding: 3px $gutter;
-
-    // $padding-vertical: $baseline;
-    // $padding-horizontal: $gutter;
-    // $height: $line-height + $padding-vertical * 2;
-
-    // height: $height;
-    // line-height: $line-height;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
     font-weight: 700;
-    background-color: colour(guardian-brand-dark);
-    border-radius: $gutter * 2;
-    color: #ffffff;
+    background-color: colour(news-support-1);
+    color: colour(news-main-1);
     svg {
         display: inline-block;
         vertical-align: middle;
-        fill: #ffffff;
-        height: 17px;
+        fill: colour(news-main-1);
         width: auto;
+        path {
+            fill: colour(news-main-1);
+        }
     }
 
     &:hover {
-        background-color: darken(colour(guardian-brand-dark), 10%);
+        background-color: #ffffff;
     }
 }
 .brexit__button--dislike {
@@ -136,12 +105,8 @@ a, button {
         transform: rotate(180deg);
     }
 }
-.brexit__button--survey {
-    padding: 3px 8px;
-}
 .brexit__feedback {
-    @include fs-textSans(1);
-    color: colour(neutral-2);
+    @include fs-textSans(2);
     margin-top: $baseline;
     text-align: right;
 }
@@ -160,30 +125,8 @@ a, button {
     color: colour(news-main-2);
     margin-top: $baseline;
 }
-.card-stack {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-}
-.card-stack--one {
-    background-color: colour(neutral-3);
-    transform: rotate(3deg);
-    @include mq(embedded-wide) {
-        transform: rotate(2deg);
-    }
-}
-.card-stack--two {
-    background-color: colour(neutral-5);
-    transform: rotate(-3deg);
-    @include mq(embedded-wide) {
-        transform: rotate(-2deg);
-    }
-}
 p, ol {
-    @include fs-textSans(4);
-    line-height: 20px;
+    @include fs-textSans(3);
     margin: 0;
+    font-weight: bold;
 }
