@@ -20,7 +20,37 @@ function bindEventHandlers() {
 }
 
 window.init = function init(el, config) {
+    var isVisible;
+
     iframeMessenger.enableAutoResize();
+    iframeMessenger.monitorPosition(data => {
+        function _isVisible(threshold) {
+            var threshold = threshold || 1;
+            var width = data.iframeRight - data.iframeLeft;
+            var height = data.iframeBottom - data.iframeTop;
+            return (
+                data.iframeLeft >= -(width * (1 - threshold)) &&
+                data.iframeTop >= -(height * (1 - threshold)) &&
+                data.iframeRight <= data.innerWidth + (width * (1 - threshold)) &&
+                data.iframeBottom <= data.innerHeight + (height * (1 - threshold))
+            );
+        }
+
+        function _hasVisibilityChanged() {
+            var wasVisible = isVisible;
+            isVisible = _isVisible(0.5);
+            return (wasVisible !== isVisible);
+        }
+
+        if (_hasVisibilityChanged()) {
+            if (isVisible) {
+                console.log('%c VISIBLE', 'background: #222; color: #bada55');
+            } else {
+                console.log('%c NOT VISIBLE', 'background: #222; color: #bada55');
+            }
+        }
+    });
+
 
     var query = window.location.search.replace('?', '').split('&');
     var params = {};
