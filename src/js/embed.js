@@ -4,8 +4,17 @@ import thankYouHTML from './text/thankYou.html!text'
 
 // import reasonsTemplate from './text/reasons.dot.html!text'
 import questionAndAnswer from './text/questionAndAnswer.dot.html!text'
+import expandableQuestionAndAnswer from './text/expandableQuestionAndAnswer.dot.html!text'
 
 import dot from 'olado/doT'
+
+if (!('remove' in Element.prototype)) {
+    Element.prototype.remove = function() {
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
+    };
+}
 
 function q(selectorString) {
     return [].slice.apply(document.querySelectorAll(selectorString));
@@ -17,12 +26,15 @@ function bindEventHandlers() {
         let feedback = el.parentNode;
         feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, el.getAttribute('data-survey-href'));
     }));
+
+    q('.js-expand').forEach(el => el.addEventListener('click', ev => {
+        let link = ev.currentTarget;
+        q('.js-extra-content').forEach(el => el.classList.remove('u-hidden'));
+        link.remove();
+    }));
 }
 
-window.init = function init(el, config) {
-    var isVisible;
-
-    iframeMessenger.enableAutoResize();
+function setupVisibilityMonitoring() {
     iframeMessenger.monitorPosition(data => {
         function _isVisible(threshold) {
             var threshold = threshold || 1;
@@ -49,8 +61,27 @@ window.init = function init(el, config) {
                 console.log('%c NOT VISIBLE', 'background: #222; color: #bada55');
             }
         }
-    });
+    });    
+}
 
+var formats = {
+    flat: {
+        template: questionAndAnswer
+    },
+    expandable: {
+        template: expandableQuestionAndAnswer
+    },
+    carousel: {
+        template: ''
+    }
+}
+
+window.init = function init(el, config) {
+    var isVisible;
+
+    iframeMessenger.enableAutoResize();
+
+    setupVisibilityMonitoring();
 
     var query = window.location.search.replace('?', '').split('&');
     var params = {};
@@ -61,6 +92,8 @@ window.init = function init(el, config) {
 
     var sheet = params.sheet;
     var id = params.id;
+
+    var format = params.format || 'flat';
     reqwest({
         url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
@@ -81,7 +114,14 @@ window.init = function init(el, config) {
                     return;
                 }
 
-                let fn = dot.template(questionAndAnswer);
+                let template = formats[format] && formats[format].template;
+
+                if (!template) {
+                    console.log('format ' + format + ' is not valid');
+                    return;
+                }
+
+                let fn = dot.template(template);
                 let trackingCode = 'brexit__' + sheet + '__' + row.id;
                 el.innerHTML = fn({
                     data: row,

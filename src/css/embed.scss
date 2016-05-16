@@ -52,6 +52,10 @@ a, button {
     font-weight: 900;
 }
 
+.u-hidden {
+    display: none;
+}
+
 .brexit {
     margin: $baseline*1.5 0;
     padding: $baseline/2 $gutter/2;
@@ -131,6 +135,6 @@ a, button {
 }
 p, ol {
     @include fs-textSans(3);
-    margin: 0;
+    margin: 0 0 $baseline/2 0;
     font-weight: bold;
 }
