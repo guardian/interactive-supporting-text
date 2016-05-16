@@ -66,12 +66,21 @@ function setupVisibilityMonitoring() {
 
 var formats = {
     flat: {
+        preprocess: (data) => data,
         template: questionAndAnswer
     },
     expandable: {
+        preprocess: (data) => {
+            // TODO: don't modify data in place!
+            let words = data.Answer.split(' ');
+            data.mainAnswer = words.slice(0, 65).join(' ');
+            data.extraAnswer = words.slice(65).join(' ');
+            return data;
+        },
         template: expandableQuestionAndAnswer
     },
     carousel: {
+        preprocess: (data) => data,
         template: ''
     }
 }
@@ -124,7 +133,7 @@ window.init = function init(el, config) {
                 let fn = dot.template(template);
                 let trackingCode = 'brexit__' + sheet + '__' + row.id;
                 el.innerHTML = fn({
-                    data: row,
+                    data: formats[format].preprocess(row),
                     trackingCode: {
                         like: trackingCode + '__like',
                         dislike: trackingCode + '__dislike'
