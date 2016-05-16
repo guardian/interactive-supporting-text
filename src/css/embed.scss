@@ -68,8 +68,12 @@ a, button {
         height: 100%;
         top: 0;
         left: 3%;
-        transform: rotate(-5deg);
         z-index: -1;
+
+        transform: rotate(-5deg);
+        @include mq(embedded-wide) {
+            transform: rotate(-3deg);
+        }
     }
 }
 
