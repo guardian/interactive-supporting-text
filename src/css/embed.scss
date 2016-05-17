@@ -94,7 +94,10 @@ a, button {
     font-weight: 700;
     background-color: colour(news-support-1);
     color: colour(news-main-1);
+    text-align: center;
+    padding: 0 6px;
     svg {
+        text-align: center;
         display: inline-block;
         vertical-align: middle;
         fill: colour(news-main-1);
@@ -116,6 +119,7 @@ a, button {
     }
 }
 .brexit__button--survey {
+    padding: 0;
     svg {
         // Height has to be set for mobile browsers, for some reason
         height: 28px;
