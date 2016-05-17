@@ -10,6 +10,7 @@
 
 $baseline: 12px;
 $gutter: 10px;
+$shadow-height: 18px;
 
 html,
 body {
@@ -63,21 +64,23 @@ a, button {
     color: #ffffff;
     position: relative;
 
-    &:before {
+    &:before, &:after {
         content: '';
         display: block;
         position: absolute;
-        background-color: colour(news-main-2);
-        width: 94%;
-        height: 100%;
-        top: 0;
-        left: 3%;
-        z-index: -1;
+        left: 0;
+        width: 100%;
+        height: $shadow-height;
+    }
 
-        transform: rotate(-5deg);
-        @include mq(embedded-wide) {
-            transform: rotate(-3deg);
-        }
+    &:before {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="250" height="18" viewBox="0 0 250 18"><path fill="#4BC6DF" d="M230 18l-1.6-18L22.7 18"/></svg>') no-repeat right;
+        top: -$shadow-height;
+    }
+
+    &:after {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="250" height="18" viewBox="0 0 250 18"><path fill="#4BC6DF" d="M20 0l1.6 18L227.3 0"/></svg>') no-repeat left;
+        bottom: -$shadow-height;
     }
 }
 
