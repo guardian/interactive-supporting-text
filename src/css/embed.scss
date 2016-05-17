@@ -145,7 +145,7 @@ a, button {
     color: colour(news-main-2);
     margin-top: $baseline;
 }
-p, ol {
+p, ol, ul {
     @include fs-textSans(3);
     margin: 0 0 $baseline/2 0;
     font-weight: bold;
