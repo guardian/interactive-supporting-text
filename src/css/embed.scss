@@ -38,6 +38,12 @@ a, button {
     }
 }
 
+br {
+    content: '';
+    display: block;
+    margin-bottom: $baseline;
+}
+
 @mixin clearfix {
     &:after,
     &:before {
