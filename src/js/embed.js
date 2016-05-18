@@ -16,6 +16,8 @@ if (!('remove' in Element.prototype)) {
     };
 }
 
+var isVisible;
+
 function q(selectorString) {
     return [].slice.apply(document.querySelectorAll(selectorString));
 }
@@ -86,7 +88,6 @@ var formats = {
 }
 
 window.init = function init(el, config) {
-    var isVisible;
 
     iframeMessenger.enableAutoResize();
 
