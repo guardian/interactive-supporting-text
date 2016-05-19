@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                 }
             },
             embed: {
-                command: './node_modules/.bin/jspm bundle-sfx <%= visuals.jspmFlags %> src/js/embed build/embed.js',
+                command: './node_modules/.bin/jspm bundle-sfx <%= visuals.jspmFlags %> src/js/embed build/embed.js --source-map-contents',
                 options: {
                     execOptions: {
                         cwd: '.'
