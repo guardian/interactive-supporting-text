@@ -154,6 +154,15 @@ br {
     color: colour(news-main-2);
     margin-top: $baseline;
 }
+.brexit__read-more {
+    @include fs-textSans(2);
+    font-weight: 400;
+    text-decoration: none;
+
+    &:hover {
+        border-bottom: 1px solid colour(news-support-1);
+    }
+}
 p, ol, ul {
     @include fs-textSans(3);
     margin: 0 0 $baseline/2 0;
