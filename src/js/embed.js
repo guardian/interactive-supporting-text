@@ -1,15 +1,11 @@
-import iframeMessenger from 'guardian/iframe-messenger'
-import reqwest from 'reqwest'
-import thankYouHTML from './text/thankYou.html!text'
-
-// import reasonsTemplate from './text/reasons.dot.html!text'
-import questionAndAnswer from './text/questionAndAnswer.dot.html!text'
-import expandableQuestionAndAnswer from './text/expandableQuestionAndAnswer.dot.html!text'
-
-import dot from 'olado/doT'
+import iframeMessenger from 'guardian/iframe-messenger';
+import reqwest from 'reqwest';
+import dot from 'olado/doT';
+import formats from './formats';
+import render from './render';
 
 if (!('remove' in Element.prototype)) {
-    Element.prototype.remove = function() {
+    Element.prototype.remove = function () {
         if (this.parentNode) {
             this.parentNode.removeChild(this);
         }
@@ -18,30 +14,14 @@ if (!('remove' in Element.prototype)) {
 
 var isVisible;
 
-function q(selectorString) {
-    return [].slice.apply(document.querySelectorAll(selectorString));
-}
-
-function bindEventHandlers() {
-    q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
-        let el = ev.currentTarget;
-        let feedback = el.parentNode;
-        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, el.getAttribute('data-survey-href'));
-    }));
-
-    q('.js-expand').forEach(el => el.addEventListener('click', ev => {
-        let link = ev.currentTarget;
-        q('.js-extra-content').forEach(el => el.classList.remove('u-hidden'));
-        link.remove();
-    }));
-}
-
 function setupVisibilityMonitoring() {
     iframeMessenger.monitorPosition(data => {
         function _isVisible(threshold) {
-            var threshold = threshold || 1;
-            var width = data.iframeRight - data.iframeLeft;
-            var height = data.iframeBottom - data.iframeTop;
+            const width = data.iframeRight - data.iframeLeft;
+            const height = data.iframeBottom - data.iframeTop;
+
+            threshold = threshold || 1;
+
             return (
                 data.iframeLeft >= -(width * (1 - threshold)) &&
                 data.iframeTop >= -(height * (1 - threshold)) &&
@@ -51,8 +31,10 @@ function setupVisibilityMonitoring() {
         }
 
         function _hasVisibilityChanged() {
-            var wasVisible = isVisible;
+            const wasVisible = isVisible;
+
             isVisible = _isVisible(0.5);
+
             return (wasVisible !== isVisible);
         }
 
@@ -63,89 +45,70 @@ function setupVisibilityMonitoring() {
                 console.log('%c NOT VISIBLE', 'background: #222; color: #bada55');
             }
         }
-    });    
+    });
 }
 
-var formats = {
-    flat: {
-        preprocess: (data) => data,
-        template: questionAndAnswer
-    },
-    expandable: {
-        preprocess: (data) => {
-            // TODO: don't modify data in place!
-            let words = data.Answer.split(' ');
-            data.mainAnswer = words.slice(0, 65).join(' ');
-            data.extraAnswer = words.slice(65).join(' ');
-            return data;
-        },
-        template: expandableQuestionAndAnswer
-    },
-    carousel: {
-        preprocess: (data) => data,
-        template: ''
-    }
+function getQueryParams() {
+    const query = window.location.search.replace('?', '').split('&');
+    const params = {};
+
+    query.forEach(q => {
+        const keyVal = q.split('=');
+        params[keyVal[0]] = keyVal[1];
+    });
+
+    return params;
 }
 
-window.init = function init(el, config) {
+window.init = function init(parentEl, config) {
 
     iframeMessenger.enableAutoResize();
 
     setupVisibilityMonitoring();
 
-    var query = window.location.search.replace('?', '').split('&');
-    var params = {};
-    query.forEach(q => {
-        let keyVal = q.split('=');
-        params[keyVal[0]] = keyVal[1];
-    });
-
-    var sheet = params.sheet;
-    var id = params.id;
-
-    var format = params.format || 'flat';
     reqwest({
         url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
-        success: (resp) => {
-            var rows = resp && resp.sheets && resp.sheets[sheet];
-            var row;
+        success: (res) => {
+            const params = getQueryParams();
+            const {sheet, id, format = 'flat'} = params;
+            const rows = res && res.sheets && res.sheets[sheet];
+            const template = formats[format] && formats[format].template;
+            const templateFn = dot.template(template);
+            const trackingCode = 'brexit__' + sheet + '__' + id;
+            let data;
+            let row;
 
-            if (rows && rows.length) {
-                for (var i = 0; i < rows.length; i++) {
-                    if (rows[i].id === id) {
-                        row = rows[i];
-                    }
-                }
-
-                if (!row) {
-                    console.log('row with id ' + id + ' not found');
-                    return;
-                }
-
-                let template = formats[format] && formats[format].template;
-
-                if (!template) {
-                    console.log('format ' + format + ' is not valid');
-                    return;
-                }
-
-                let fn = dot.template(template);
-                let trackingCode = 'brexit__' + sheet + '__' + row.id;
-                el.innerHTML = fn({
-                    data: formats[format].preprocess(row),
-                    trackingCode: {
-                        like: trackingCode + '__like',
-                        dislike: trackingCode + '__dislike'
-                    }
-                });
-
-                bindEventHandlers();
-            } else {
+            if (!rows || !rows.length) {
                 console.log('bad JSON response');
-                console.log(resp);
+                console.log(res);
+
+                return;
             }
+            rows.forEach((r) => {
+                if (r.id === id) {
+                    row = r;
+                }
+            });
+            if (!row) {
+                console.log('row with id ' + id + ' not found');
+
+                return;
+            }
+            if (!template) {
+                console.log('format ' + format + ' is not valid');
+
+                return;
+            }
+            data = {
+                data: formats[format].preprocess(row),
+                trackingCode: {
+                    like: trackingCode + '__like',
+                    dislike: trackingCode + '__dislike'
+                }
+            };
+            render(templateFn, data, parentEl);
         }
     });
 };
