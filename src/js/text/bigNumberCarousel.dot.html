@@ -1,0 +1,44 @@
+<div class="brexit brexit--carousel">
+    <ol class="brexit__carousel-content">
+        {{~it.data :value:index}}
+        <li class="brexit__carousel-slide{{? index===0}} brexit__carousel-slide--current js-current{{?}}" id="carousel-slide-{{=index}}">
+            <p class="brexit__carousel-headline">
+                {{=value.bigNumber}}
+            </p>
+            <p class="brexit__carousel-text">
+                {{=value.answer}}
+            </p>
+        </li>
+        {{~}}
+    </ol>
+    <a class="brexit__carousel-control brexit__carousel-control--prev js-prev">
+        <div class="brexit__carousel-control-label">&lt;</div>
+    </a>
+    <a class="brexit__carousel-control brexit__carousel-control--next js-next">
+        <div class="brexit__carousel-control-label brexit__carousel-control-label--next">&gt;</div>
+    </a>
+    <div class="brexit__carousel-indicators">
+        {{~it.data :value:index}}
+        <a id="carousel-indicator-{{=index}}" class="brexit__carousel-indicator--hit js-indicator">
+            <div class="brexit__carousel-indicator{{? index===0}} brexit__carousel-indicator--active js-active{{??}} brexit__carousel-indicator--passive{{?}}"></div>
+        </a>
+        {{~}}
+    </div>
+    <div class="brexit__feedback">
+        <span class="brexit__feedback-question">Was this explainer helpful?</span>
+        <button class="brexit__button js-feedback" data-survey-href="{{=it.data.survey_like}}"
+                data-link-name="{{=it.trackingCode.like}}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+                <path fill="#FFF"
+                      d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"/>
+            </svg>
+        </button>
+        <button class="brexit__button brexit__button--dislike js-feedback"
+                data-survey-href="{{=it.data.survey_dislike}}" data-link-name="{{=it.trackingCode.dislike}}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+                <path fill="#FFF"
+                      d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"/>
+            </svg>
+        </button>
+    </div>
+</div>
