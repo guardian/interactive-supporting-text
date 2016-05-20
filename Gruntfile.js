@@ -12,6 +12,10 @@ module.exports = function(grunt) {
             options: {
                 processors: [
                     require('autoprefixer')({browsers: ['> 5%', 'last 2 versions', 'IE 9', 'Safari 6']}),
+                    require('postcss-base64')({
+                      pattern: /<svg.*<\/svg>/i,
+                      prepend: 'data:image/svg+xml;base64,'
+                    }),
                     require('cssnano')()
                 ]
             },
