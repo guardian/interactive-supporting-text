@@ -59,10 +59,6 @@ br {
     font-weight: 900;
 }
 
-.u-hidden {
-    display: none;
-}
-
 .brexit {
     margin: $baseline*1.5 0;
     padding: $baseline/2 $gutter/2;
@@ -163,6 +159,108 @@ br {
         border-bottom: 1px solid colour(news-support-1);
     }
 }
+
+/****** BEGIN Carousel ******/
+.brexit--carousel {
+    margin: 18px 14px;
+}
+
+.brexit__carousel-content {
+    margin: 12px 23px;
+    padding: 0;
+}
+
+.brexit__carousel-slide {
+    width: 100%;
+    list-style: none;
+    display: none;
+}
+
+.brexit__carousel-slide--current {
+    display: block;
+}
+
+.brexit__carousel-control {
+    display: block;
+    position: absolute;
+    top: 20%;
+    width: 40%;
+    height: 60%;
+
+    &:hover {
+        .brexit__carousel-control-label {
+            background-color: #fff;
+        }
+    }
+}
+
+.brexit__carousel-control-label {
+    position: absolute;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    border-radius: 28px;
+    line-height: 28px;
+    color: colour(news-main-1);
+    background-color: colour(news-main-2);
+    text-align: center;
+}
+
+.brexit__carousel-control--prev {
+    left: -14px;
+}
+
+.brexit__carousel-control--next {
+    right: -14px;
+}
+
+.brexit__carousel-control-label--next {
+    right: 0;
+}
+
+.brexit__carousel-indicators {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+
+.brexit__carousel-indicator--hit {
+    display: inline-block;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.brexit__carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.brexit__carousel-indicator--active {
+    background-color: #fff;
+}
+
+.brexit__carousel-indicator--passive {
+    background-color: colour(news-support-1);
+    opacity: .5;
+}
+
+.brexit__carousel-headline {
+    @include fs-headline(5);
+    .big-number {
+        font-weight: 900;
+        font-size: 72px;
+        line-height: 72px;
+    }
+    margin: 0;
+}
+
+.brexit__carousel-text {
+    margin: 0;
+}
+/****** END Carousel ******/
+
 p, ol, ul {
     @include fs-textSans(3);
     margin: 0 0 $baseline/2 0;
@@ -170,4 +268,8 @@ p, ol, ul {
 }
 ul {
     padding-left: $gutter * 2;
+}
+
+.u-hidden {
+    display: none;
 }

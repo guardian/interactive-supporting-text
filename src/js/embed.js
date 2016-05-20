@@ -1,7 +1,7 @@
 import iframeMessenger from 'guardian/iframe-messenger';
 import reqwest from 'reqwest';
 import dot from 'olado/doT';
-import formats from './formats';
+import formats from './formats/index';
 import render from './render';
 
 if (!('remove' in Element.prototype)) {
@@ -73,11 +73,12 @@ window.init = function init(parentEl, config) {
         success: (res) => {
             const params = getQueryParams();
             const {sheet, id, format = 'flat'} = params;
-            const rows = res && res.sheets && res.sheets[sheet];
-            const template = formats[format] && formats[format].template;
+            const { template, postRender, preprocess } = formats[format];
             const templateFn = dot.template(template);
+            const rows = res && res.sheets && res.sheets[sheet];
             const trackingCode = 'brexit__' + sheet + '__' + id;
-            let data;
+            let rowData;
+            let templateData;
             let row;
 
             if (!rows || !rows.length) {
@@ -101,14 +102,16 @@ window.init = function init(parentEl, config) {
 
                 return;
             }
-            data = {
-                data: formats[format].preprocess(row),
+            rowData = preprocess(row);
+            templateData = {
+                data: rowData,
                 trackingCode: {
                     like: trackingCode + '__like',
                     dislike: trackingCode + '__dislike'
                 }
             };
-            render(templateFn, data, parentEl);
+            render(templateFn, templateData, parentEl);
+            postRender(rowData);
         }
     });
 };
