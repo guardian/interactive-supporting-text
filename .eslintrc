@@ -1,0 +1,20 @@
+{
+    "extends": "airbnb-base",
+    "plugins": [
+        "import"
+    ],
+    "settings": {
+        "import/resolve": {
+            "moduleDirectory": [
+                "./jspm_packages/github",
+                "."
+            ]
+        },
+        "import/resolver": {
+            "jspm": true
+        }
+    },
+    "rules": {
+        "indent": ["error", 4]
+    }
+}

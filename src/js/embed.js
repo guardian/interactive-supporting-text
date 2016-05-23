@@ -5,22 +5,20 @@ import formats from './formats/index';
 import render from './render';
 
 if (!('remove' in Element.prototype)) {
-    Element.prototype.remove = function () {
+    Element.prototype.remove = function remove() {
         if (this.parentNode) {
             this.parentNode.removeChild(this);
         }
     };
 }
 
-var isVisible;
+let visible;
 
 function setupVisibilityMonitoring() {
     iframeMessenger.monitorPosition(data => {
-        function _isVisible(threshold) {
+        function isVisible(threshold = 1) {
             const width = data.iframeRight - data.iframeLeft;
             const height = data.iframeBottom - data.iframeTop;
-
-            threshold = threshold || 1;
 
             return (
                 data.iframeLeft >= -(width * (1 - threshold)) &&
@@ -30,19 +28,19 @@ function setupVisibilityMonitoring() {
             );
         }
 
-        function _hasVisibilityChanged() {
-            const wasVisible = isVisible;
+        function hasVisibilityChanged() {
+            const wasVisible = visible;
 
-            isVisible = _isVisible(0.5);
+            visible = isVisible(0.5);
 
-            return (wasVisible !== isVisible);
+            return (wasVisible !== visible);
         }
 
-        if (_hasVisibilityChanged()) {
-            if (isVisible) {
-                console.log('%c VISIBLE', 'background: #222; color: #bada55');
+        if (hasVisibilityChanged()) {
+            if (visible) {
+                // TODO: track visibility change
             } else {
-                console.log('%c NOT VISIBLE', 'background: #222; color: #bada55');
+                // TODO: track visibility change
             }
         }
     });
@@ -60,32 +58,24 @@ function getQueryParams() {
     return params;
 }
 
-window.init = function init(parentEl, config) {
-
+window.init = function init(parentEl) {
     iframeMessenger.enableAutoResize();
-
     setupVisibilityMonitoring();
-
     reqwest({
         url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
         type: 'json',
         crossOrigin: false,
         success: (res) => {
             const params = getQueryParams();
-            const {sheet, id, format = 'flat'} = params;
+            const { sheet, id, format = 'flat' } = params;
             const { template, postRender, preprocess } = formats[format];
             const templateFn = dot.template(template);
             const rows = res && res.sheets && res.sheets[sheet];
-            const trackingCode = 'brexit__' + sheet + '__' + id;
-            let rowData;
-            let templateData;
+            const trackingCode = `brexit__${sheet}__${id}`;
             let row;
 
             if (!rows || !rows.length) {
-                console.log('bad JSON response');
-                console.log(res);
-
-                return;
+                throw new Error(`bad JSON response: ${JSON.stringify(res)}`);
             }
             rows.forEach((r) => {
                 if (r.id === id) {
@@ -93,26 +83,21 @@ window.init = function init(parentEl, config) {
                 }
             });
             if (!row) {
-                console.log('row with id ' + id + ' not found');
-
-                return;
+                throw new Error(`row with id ${id} not found`);
             }
             if (!template) {
-                console.log('format ' + format + ' is not valid');
-
-                return;
+                throw new Error(`format ${format} is not valid`);
             }
-            rowData = preprocess(row);
-            templateData = {
+            const rowData = preprocess(row);
+            const templateData = {
                 data: rowData,
                 trackingCode: {
-                    like: trackingCode + '__like',
-                    dislike: trackingCode + '__dislike'
-                }
+                    like: `${trackingCode}__like`,
+                    dislike: `${trackingCode}__dislike`,
+                },
             };
             render(templateFn, templateData, parentEl);
             postRender(rowData);
-        }
+        },
     });
 };
-
