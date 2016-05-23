@@ -26,6 +26,11 @@ aws_access_key_id = <YOUR_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
 ```
 
+Coding style and linting
+------------------------
+`npm run lint`
+
+We are using a modified version of [AirBnB's JavaScript Style Guide](https://github.com/guardian/interactive-brexit-companion/blob/master/style-guide.md).
 
 Using third party js
 --------------------
