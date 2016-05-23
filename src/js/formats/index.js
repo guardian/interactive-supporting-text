@@ -1,9 +1,11 @@
 import bigNumberCarousel from './bigNumberCarousel';
+import textCarousel from './textCarousel';
 import flat from './flat';
 import expandable from './expandable';
 
 export default {
-    flat: flat,
-    expandable: expandable,
-    carousel: bigNumberCarousel
+    flat,
+    expandable,
+    number_carousel: bigNumberCarousel,
+    text_carousel: textCarousel,
 };

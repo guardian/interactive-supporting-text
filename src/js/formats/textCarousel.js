@@ -4,20 +4,16 @@ import buildCarousel from './helpers/buildCarousel';
 export default {
     preprocess(data) {
         const newData = [];
-        const bigNumberMatcher = /(\d+|\/|\.)/g;
         const max = 5;
         let i = 1;
-        let bigNumber;
+        let headline;
         let answer;
 
         for (; i <= max; i += 1) {
-            bigNumber = data[`big_number_${i}`];
+            headline = data[`headline_${i}`];
             answer = data[`answer_${i}`];
-            if (answer && bigNumber) {
-                bigNumber = bigNumber.replace(
-                    bigNumberMatcher, '<span class="big-number">$1</span>'
-                );
-                newData.push({ bigNumber, answer });
+            if (headline && answer) {
+                newData.push({ headline, answer });
             }
         }
 
