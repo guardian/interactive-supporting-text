@@ -3,7 +3,9 @@ import buildCarousel from './helpers/buildCarousel';
 
 export default {
     preprocess(data) {
-        const newData = [];
+        const slides = [];
+        const { survey_like, survey_dislike } = data;
+        const newData = { survey_like, survey_dislike };
         const bigNumberMatcher = /(\d+|\/|\.)/g;
         const max = 5;
         let i = 1;
@@ -17,14 +19,15 @@ export default {
                 bigNumber = bigNumber.replace(
                     bigNumberMatcher, '<span class="big-number">$1</span>'
                 );
-                newData.push({ bigNumber, answer });
+                slides.push({ bigNumber, answer });
             }
         }
+        newData.slides = slides;
 
         return newData;
     },
     postRender(data) {
-        const slideCount = data.length;
+        const slideCount = data.slides.length;
 
         buildCarousel(slideCount);
     },

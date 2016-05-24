@@ -3,7 +3,9 @@ import buildCarousel from './helpers/buildCarousel';
 
 export default {
     preprocess(data) {
-        const newData = [];
+        const slides = [];
+        const { survey_like, survey_dislike } = data;
+        const newData = { survey_like, survey_dislike };
         const max = 5;
         let i = 1;
         let headline;
@@ -13,14 +15,15 @@ export default {
             headline = data[`headline_${i}`];
             answer = data[`answer_${i}`];
             if (headline && answer) {
-                newData.push({ headline, answer });
+                slides.push({ headline, answer });
             }
         }
+        newData.slides = slides;
 
         return newData;
     },
     postRender(data) {
-        const slideCount = data.length;
+        const slideCount = data.slides.length;
 
         buildCarousel(slideCount);
     },

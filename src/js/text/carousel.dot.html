@@ -1,6 +1,6 @@
 <div class="brexit brexit--carousel">
     <ol class="brexit__carousel-content">
-        {{~it.data :value:index}}
+        {{~it.data.slides :value:index}}
         <li class="brexit__carousel-slide{{? index===0}} brexit__carousel-slide--current js-current{{?}}" id="carousel-slide-{{=index}}">
             {{? value.headline}}
             <h1 class="brexit__header">
