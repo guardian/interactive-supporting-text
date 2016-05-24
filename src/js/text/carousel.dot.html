@@ -2,7 +2,7 @@
     <ol class="brexit__content">
         {{~it.data.slides :value:index}}
         <li class="brexit__carousel-slide{{? index===0}} brexit__carousel-slide--current js-current{{?}}" id="carousel-slide-{{=index}}">
-            {{? value.headline}}
+            {{? typeof value.headline !== 'undefined'}}
             <h1 class="brexit__header">
                 {{=value.headline}}
             </h1>
