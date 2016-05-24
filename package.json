@@ -28,6 +28,7 @@
   "scripts": {
     "start": "./node_modules/.bin/grunt",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ./src/js",
     "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/jspm install"
   },
   "author": "",
