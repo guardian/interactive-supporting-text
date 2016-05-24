@@ -12,8 +12,8 @@ export default {
         let answer;
 
         for (; i <= max; i += 1) {
-            headline = data[`headline_${i}`];
-            answer = data[`answer_${i}`];
+            headline = data[`answer_${i}_title`];
+            answer = data[`answer_${i}_body`];
             if (headline && answer) {
                 slides.push({ headline, answer });
             }
@@ -28,5 +28,5 @@ export default {
         buildCarousel(slideCount);
     },
     template: carouselTemplate,
-    url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+    url: 'https://interactive.guim.co.uk/docsdata/1pLLboA0_VJEDvXD5kuERWaQMdevH0DuiOrpESnCbkXQ.json',
 };
