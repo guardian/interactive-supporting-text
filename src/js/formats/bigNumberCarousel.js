@@ -13,8 +13,8 @@ export default {
         let answer;
 
         for (; i <= max; i += 1) {
-            bigNumber = data[`big_number_${i}`];
-            answer = data[`answer_${i}`];
+            bigNumber = data[`number_${i}`];
+            answer = data[`fact_${i}`];
             if (answer && bigNumber) {
                 bigNumber = bigNumber.replace(
                     bigNumberMatcher, '<span class="big-number">$1</span>'
@@ -32,5 +32,5 @@ export default {
         buildCarousel(slideCount);
     },
     template: carouselTemplate,
-    url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+    url: 'https://interactive.guim.co.uk/docsdata/1h7mnJsLETpkgNe2UJC35ChJzrHVi7INjLpH5sEAYcqQ.json',
 };
