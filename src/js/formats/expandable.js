@@ -19,5 +19,6 @@ export default {
             readMoreLink.remove();
         }));
     },
-    template: expandableTemplate
+    template: expandableTemplate,
+    url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
 };

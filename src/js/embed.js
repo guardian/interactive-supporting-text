@@ -59,16 +59,17 @@ function getQueryParams() {
 }
 
 window.init = function init(parentEl) {
+    const params = getQueryParams();
+    const { sheet, id, format = 'flat' } = params;
+    const { template, postRender, preprocess, url } = formats[format];
+
     iframeMessenger.enableAutoResize();
     setupVisibilityMonitoring();
     reqwest({
-        url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
+        url,
         type: 'json',
         crossOrigin: false,
         success: (res) => {
-            const params = getQueryParams();
-            const { sheet, id, format = 'flat' } = params;
-            const { template, postRender, preprocess } = formats[format];
             const templateFn = dot.template(template);
             const rows = res && res.sheets && res.sheets[sheet];
             const trackingCode = `brexit__${sheet}__${id}`;

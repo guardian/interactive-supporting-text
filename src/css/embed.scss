@@ -161,12 +161,14 @@ br {
 }
 
 /****** BEGIN Carousel ******/
+$brexit-control-button-size: 28px;
+
 .brexit--carousel {
-    margin: 18px 14px;
+    margin: $baseline*1.5 $brexit-control-button-size*0.5;
 }
 
 .brexit__carousel-content {
-    margin: 12px 23px;
+    margin: 0 23px;
     padding: 0;
 }
 
@@ -197,21 +199,21 @@ br {
 .brexit__carousel-control-label {
     position: absolute;
     top: 50%;
-    width: 28px;
-    height: 28px;
-    border-radius: 28px;
-    line-height: 28px;
+    width: $brexit-control-button-size;
+    height: $brexit-control-button-size;
+    border-radius: $brexit-control-button-size;
+    line-height: $brexit-control-button-size;
     color: colour(news-main-1);
     background-color: colour(news-main-2);
     text-align: center;
 }
 
 .brexit__carousel-control--prev {
-    left: -14px;
+    left: $brexit-control-button-size * -0.5;
 }
 
 .brexit__carousel-control--next {
-    right: -14px;
+    right: $brexit-control-button-size * -0.5;
 }
 
 .brexit__carousel-control-label--next {
@@ -221,7 +223,7 @@ br {
 .brexit__carousel-indicators {
     text-align: center;
     padding: 0;
-    margin: 0;
+    margin: $baseline 0;
     line-height: 0;
 }
 
@@ -246,14 +248,14 @@ br {
     opacity: .5;
 }
 
-.brexit__carousel-headline {
+.brexit__carousel-header {
     @include fs-headline(5);
     .big-number {
         font-weight: 900;
         font-size: 72px;
         line-height: 72px;
     }
-    margin: 0;
+    margin: $baseline 0 0 0;
 }
 
 .brexit__carousel-text {
