@@ -1,0 +1,42 @@
+<div class="brexit brexit--nav-controls">
+    <div class="brexit__slider-container js-slider-container">
+        <div class="brexit__content brexit__slider">
+            <h1 class="brexit__header">
+                {{=it.data.answer_1_title}}
+            </h1> 
+            <p>
+                {{=it.data.answer_1_body}}
+            </p>
+        </div>
+        <div class="brexit__content brexit__slider">
+            <h1 class="brexit__header">
+                {{=it.data.question}}
+            </h1>    
+        </div>
+        <div class="brexit__content brexit__slider">
+            <h1 class="brexit__header">
+                {{=it.data.answer_2_title}}
+            </h1> 
+            <p>
+                {{=it.data.answer_2_body}}
+            </p>
+        </div>
+    </div>
+    <div class="brexit__content">
+        <div class="brexit__feedback">
+            {{#def.feedback}}
+        </div>
+    </div>
+    <a class="brexit__nav-control brexit__nav-control--text brexit__nav-control--left js-go-to-answer js-go-to-answer-one">
+        <div class="brexit__nav-control__label">{{=it.data.answer_1_title}}</div>
+    </a>
+    <a class="brexit__nav-control brexit__nav-control--text brexit__nav-control--right js-go-to-answer js-go-to-answer-two">
+        <div class="brexit__nav-control__label">{{=it.data.answer_2_title}}</div>
+    </a>
+    <a class="brexit__nav-control brexit__nav-control--prev js-back-to-question js-back-from-answer-two u-hidden">
+        <div class="brexit__nav-control__label"></div>
+    </a>
+    <a class="brexit__nav-control brexit__nav-control--next js-back-to-question js-back-from-answer-one u-hidden">
+        <div class="brexit__nav-control__label"></div>
+    </a>
+</div>
