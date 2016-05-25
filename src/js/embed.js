@@ -2,6 +2,7 @@ import iframeMessenger from 'guardian/iframe-messenger';
 import reqwest from 'reqwest';
 import dot from 'olado/doT';
 import formats from './formats/index';
+import feedback from './text/feedback.dot.partial.html!text';
 import render from './render';
 
 if (!('remove' in Element.prototype)) {
@@ -61,6 +62,10 @@ function getQueryParams() {
 window.init = function init(parentEl) {
     const params = getQueryParams();
     const { sheet, id, format = 'flat' } = params;
+
+    if (!formats[format]) {
+        throw new Error(`format ${format} is not valid`);
+    }
     const { template, postRender, preprocess, url } = formats[format];
 
     iframeMessenger.enableAutoResize();
@@ -70,7 +75,9 @@ window.init = function init(parentEl) {
         type: 'json',
         crossOrigin: false,
         success: (res) => {
-            const templateFn = dot.template(template);
+            const params = getQueryParams();
+            const { sheet, id, format = 'flat' } = params;
+            const templateFn = dot.template(template, null, {feedback: feedback});
             const rows = res && res.sheets && res.sheets[sheet];
             const trackingCode = `brexit__${sheet}__${id}`;
             let row;
@@ -85,9 +92,6 @@ window.init = function init(parentEl) {
             });
             if (!row) {
                 throw new Error(`row with id ${id} not found`);
-            }
-            if (!template) {
-                throw new Error(`format ${format} is not valid`);
             }
             const rowData = preprocess(row);
             const templateData = {
