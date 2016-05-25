@@ -252,22 +252,24 @@ $brexit-control-button-size: 28px;
 
 
 /****** BEGIN Slider ******/
-.brexit__slider-container {
+.brexit__slider-wrapper {
+    overflow: hidden;
+}
+.brexit__slider {
     @include clearfix;
     position: relative;
     left: -100%;
-    overflow: hidden;
     // currently hard-coded to 3 sliders
     // TODO: variable number of sliders
     width: 300%;
 }
-.brexit__slider-container--left {
+.brexit__slider--left {
     left: 0;
 }
-.brexit__slider-container--right {
+.brexit__slider--right {
     left: -200%;
 }
-.brexit__slider {
+.brexit__slider__item {
     float: left;
     // currently hard-coded to 3 sliders
     // TODO: variable number of sliders
