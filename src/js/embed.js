@@ -75,9 +75,7 @@ window.init = function init(parentEl) {
         type: 'json',
         crossOrigin: false,
         success: (res) => {
-            const params = getQueryParams();
-            const { sheet, id, format = 'flat' } = params;
-            const templateFn = dot.template(template, null, {feedback: feedback});
+            const templateFn = dot.template(template, null, { feedback });
             const rows = res && res.sheets && res.sheets[sheet];
             const trackingCode = `brexit__${sheet}__${id}`;
             let row;
