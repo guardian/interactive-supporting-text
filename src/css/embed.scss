@@ -216,8 +216,7 @@ $brexit-control-button-size: 28px;
     color: colour(news-main-1);
     background-color: colour(news-main-2);
     background-repeat: no-repeat;
-    background-size: 40%;
-    background-position-y: 50%;
+    background-size: 30%;
     text-align: center;
 }
 
@@ -237,7 +236,7 @@ $brexit-control-button-size: 28px;
 
     .brexit__nav-control__label {
         background-image: url('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" viewBox="0 0 20 36"><path fill="#00456e" d="M17.8 36L.6 18.9v-1.7L17.8 0l1.6 1.6L5.7 18l13.7 16.4-1.6 1.6z"/></svg>');
-        background-position-x: 40%;
+        background-position: 45% 50%;
     }
 }
 
@@ -246,7 +245,7 @@ $brexit-control-button-size: 28px;
 
     .brexit__nav-control__label {
         background-image: url('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" viewBox="0 0 20 36"><path fill="#00456e" d="M.6 34.4L14.3 18 .6 1.6 2.2 0l17.1 17.1v1.7L2.2 36 .6 34.4z"/></svg>');
-        background-position-x: 60%;
+        background-position: 55% 50%;
     }
 }
 /****** END Nav Controls *****/
