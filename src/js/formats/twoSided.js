@@ -36,7 +36,6 @@ export default {
     },
     template: twoSidedTemplate,
 
-    // correct twoSided URL
-    url: 'http://interactive.guim.co.uk/docsdata/1SYM89nttwfXXMHJu-ACBbZxo03Vh5zGGDp7kpc8JX2Q.json',
+    url: 'https://interactive.guim.co.uk/docsdata/1SYM89nttwfXXMHJu-ACBbZxo03Vh5zGGDp7kpc8JX2Q.json',
 
 };
