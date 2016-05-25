@@ -95,6 +95,7 @@ br {
 
 .brexit__header {
     @include fs-header(3);
+    height: $baseline * 2;
     padding-bottom: $baseline * 1.5;
 }
 .brexit__button {

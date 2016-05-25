@@ -14,7 +14,7 @@ export default {
         for (; i <= max; i += 1) {
             headline = data[`answer_${i}_title`];
             answer = data[`answer_${i}_body`];
-            if (headline && answer) {
+            if (typeof headline !== 'undefined' && typeof answer !== 'undefined') {
                 slides.push({ headline, answer });
             }
         }
