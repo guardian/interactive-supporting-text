@@ -4,7 +4,7 @@ let slider;
 
 function getSlider() {
 	if (!slider) {
-		slider = q('.js-slider-container')[0];
+		slider = q('.js-slider')[0];
 	}
 	return slider;
 }
@@ -12,17 +12,17 @@ function getSlider() {
 export default {
 	slideLeft() {
 		const slider = getSlider();
-		slider.classList.remove('brexit__slider-container--right');
-		slider.classList.add('brexit__slider-container--left');
+		slider.classList.remove('brexit__slider--right');
+		slider.classList.add('brexit__slider--left');
 	},
 	slideRight() {
 		const slider = getSlider();
-		slider.classList.add('brexit__slider-container--right');
-		slider.classList.remove('brexit__slider-container--left');
+		slider.classList.add('brexit__slider--right');
+		slider.classList.remove('brexit__slider--left');
 	},
 	reset() {
 		const slider = getSlider();
-		slider.classList.remove('brexit__slider-container--left');
-		slider.classList.remove('brexit__slider-container--right');
+		slider.classList.remove('brexit__slider--left');
+		slider.classList.remove('brexit__slider--right');
 	}
 }
