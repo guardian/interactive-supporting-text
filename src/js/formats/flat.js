@@ -1,12 +1,9 @@
 import flatTemplate from '../text/flat.dot.html!text';
 
 export default {
-    preprocess(data) {
-        return data;
+    preprocess({ headline1: header, content1: content, survey_like, survey_dislike }) {
+        return { header, content, survey_like, survey_dislike };
     },
-    postRender() {
-
-    },
+    postRender() {},
     template: flatTemplate,
-    url: 'https://interactive.guim.co.uk/docsdata/1zsqQf4mq8fsAkZAXnoSCNpap2hykFDA3Cm3HaI9qe8k.json',
 };

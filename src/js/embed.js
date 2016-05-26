@@ -1,9 +1,10 @@
 import iframeMessenger from 'guardian/iframe-messenger';
-import reqwest from 'reqwest';
 import dot from 'olado/doT';
+import parallel from 'async.parallel';
 import formats from './formats/index';
 import feedback from './text/feedback.dot.partial.html!text';
 import render from './render';
+import requests from './requests';
 
 if (!('remove' in Element.prototype)) {
     Element.prototype.remove = function remove() {
@@ -59,51 +60,104 @@ function getQueryParams() {
     return params;
 }
 
+
 window.init = function init(parentEl) {
     const params = getQueryParams();
-    const { sheet, id, format = 'flat' } = params;
-
-    if (!formats[format]) {
-        throw new Error(`format ${format} is not valid`);
-    }
-    const { template, postRender, preprocess, url } = formats[format];
+    const isTailored = !!params.tailored;
 
     iframeMessenger.enableAutoResize();
     setupVisibilityMonitoring();
-    reqwest({
-        url,
-        type: 'json',
-        crossOrigin: false,
-        success: (res) => {
-            const templateFn = dot.template(template, null, { feedback });
-            const rows = res && res.sheets && res.sheets[sheet];
-            const trackingCode = `brexit__${sheet}__${id}`;
-            let row;
 
-            if (!rows || !rows.length) {
-                throw new Error(`bad JSON response: ${JSON.stringify(res)}`);
+    function getRowById(rows, rowId) {
+        const row = rows.reduce((prev, currentRow) => {
+            if (currentRow.id === rowId) {
+                return currentRow;
             }
-            rows.forEach((r) => {
-                if (r.id === id) {
-                    row = r;
-                }
-            });
-            if (!row) {
-                throw new Error(`row with id ${id} not found`);
-            }
-            const rowData = preprocess(row);
-            const templateData = {
-                data: rowData,
-                trackingCode: {
-                    like: `${trackingCode}__like`,
-                    dislike: `${trackingCode}__dislike`,
-                    more: `${trackingCode}__more`,
-                    prev: `${trackingCode}__prev`,
-                    next: `${trackingCode}__next`,
-                },
-            };
-            render(templateFn, templateData, parentEl);
-            postRender(rowData);
-        },
-    });
+
+            return prev;
+        }, null);
+
+        if (!row) {
+            throw new Error(`row with id ${rowId} not found`);
+        }
+
+        return row;
+    }
+
+    function buildTemplateData(rowData, trackingCode) {
+        return {
+            data: rowData,
+            trackingCode: {
+                like: `${trackingCode}__like`,
+                dislike: `${trackingCode}__dislike`,
+                more: `${trackingCode}__more`,
+                prev: `${trackingCode}__prev`,
+                next: `${trackingCode}__next`,
+            },
+        };
+    }
+
+    function getRows(response) {
+        const rows = response.sheets.content;
+
+        if (!rows || !rows.length) {
+            throw new Error(`bad JSON response: ${JSON.stringify(response)}`);
+        }
+
+        return rows;
+    }
+
+    function getFormat(row) {
+        const format = formats[row.format];
+
+        if (!format) {
+            throw new Error(`format ${row.format} is not valid`);
+        }
+
+        return format;
+    }
+
+    function doRender(row, trackingCode) {
+        const format = getFormat(row);
+        const { template, postRender, preprocess } = format;
+        const templateFn = dot.template(template, null, { feedback });
+        const rowData = preprocess(row);
+        const templateData = buildTemplateData(rowData, trackingCode);
+
+        render(templateFn, templateData, parentEl);
+        postRender(rowData);
+    }
+
+    function renderTailoredAtom(err, [spreadsheetRes, tailorRes]) {
+        if (err) {
+            throw err;
+        }
+        const rows = getRows(spreadsheetRes);
+        const level = tailorRes.level || params.default;
+        const id = params[level];
+        const row = getRowById(rows, id);
+        const trackingCode = `brexit__${level}__${id}__tailored`;
+
+        doRender(row, trackingCode);
+    }
+
+    function renderUntailoredAtom(err, [spreadsheetRes]) {
+        if (err) {
+            throw err;
+        }
+        const rows = getRows(spreadsheetRes);
+        const id = params.id;
+        const row = getRowById(rows, id);
+        const trackingCode = `brexit__${row.level}__${id}__untailored`;
+
+        doRender(row, trackingCode);
+    }
+
+    parallel(
+        [
+            requests.spreadsheetRequest,
+            isTailored ? requests.tailorRequest : callback => callback(null, {}),
+        ],
+        isTailored ? renderTailoredAtom : renderUntailoredAtom
+    );
 };
