@@ -97,6 +97,9 @@ window.init = function init(parentEl) {
                 trackingCode: {
                     like: `${trackingCode}__like`,
                     dislike: `${trackingCode}__dislike`,
+                    more: `${trackingCode}__more`,
+                    prev: `${trackingCode}__prev`,
+                    next: `${trackingCode}__next`,
                 },
             };
             render(templateFn, templateData, parentEl);
