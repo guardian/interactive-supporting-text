@@ -24,7 +24,7 @@
         <div class="brexit__nav-control__label"></div>
     </a>
     <div class="brexit__carousel-indicators">
-        {{~it.data :value:index}}
+        {{~it.data.slides :value:index}}
         <a id="carousel-indicator-{{=index}}" class="brexit__carousel-indicator--hit js-indicator">
             <div class="brexit__carousel-indicator{{? index===0}} brexit__carousel-indicator--active js-active{{??}} brexit__carousel-indicator--passive{{?}}"></div>
         </a>
