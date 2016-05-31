@@ -1,4 +1,4 @@
-<div class="brexit brexit--nav-controls">
+<div class="brexit brexit--slider">
     <div class="brexit__slider-wrapper">
         <div class="brexit__slider js-slider">
             <div class="brexit__content brexit__slider__item">
@@ -8,11 +8,32 @@
                 <p>
                     {{=it.data.answer_1_body}}
                 </p>
+                <div class="brexit__feedback">
+                    {{#def.feedback}}
+                </div>
             </div>
-            <div class="brexit__content brexit__slider__item">
-                <h1 class="brexit__header">
-                    {{=it.data.question}}
-                </h1>
+            <div class="brexit__content brexit__slider__item brexit__two-sided">
+                <div class="brexit__two-sided__row brexit__two-sided__top">
+                    <a data-answer="one"
+                       class="brexit__two-sided__control brexit__two-sided__control--left js-go-to-answer">
+                        <div class="brexit__two-sided__button brexit__two-sided__button--prev">
+                            {{=it.data.answer_1_title}}
+                        </div>
+                    </a>
+                </div>
+                <div class="brexit__two-sided__row brexit__two-sided__question">
+                    <h1 class="brexit__header">
+                        {{=it.data.question}}
+                    </h1>
+                </div>
+                <div class="brexit__two-sided__row brexit__two-sided__bottom">
+                    <a data-answer="two"
+                       class="brexit__two-sided__control brexit__two-sided__control--right js-go-to-answer">
+                        <div class="brexit__two-sided__button brexit__two-sided__button--next">
+                            {{=it.data.answer_2_title}}
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="brexit__content brexit__slider__item">
                 <h1 class="brexit__header">
@@ -21,19 +42,13 @@
                 <p>
                     {{=it.data.answer_2_body}}
                 </p>
+                <div class="brexit__feedback">
+                    {{#def.feedback}}
+                </div>
             </div>
-        </div>        
+        </div>
     </div>
 
-    <div class="brexit__content brexit__feedback">
-        {{#def.feedback}}
-    </div>
-    <a data-answer="one" class="brexit__nav-control brexit__nav-control--text brexit__nav-control--left js-go-to-answer">
-        <div class="brexit__nav-control__label">{{=it.data.answer_1_title}}</div>
-    </a>
-    <a data-answer="two" class="brexit__nav-control brexit__nav-control--text brexit__nav-control--right js-go-to-answer">
-        <div class="brexit__nav-control__label">{{=it.data.answer_2_title}}</div>
-    </a>
     <a data-answer="two" class="brexit__nav-control brexit__nav-control--prev js-back-to-question u-hidden">
         <div class="brexit__nav-control__label"></div>
     </a>

@@ -62,6 +62,22 @@ br {
     }
 }
 
+@mixin vertically-center {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+$brexit-control-button-size: 28px;
+
+@mixin button($size) {
+    height: $size;
+    border-radius: $size;
+    line-height: $size;
+    color: colour(news-main-1);
+    background-color: colour(news-main-2);
+    background-repeat: no-repeat;
+}
+
 .u-bold {
     font-weight: 900;
 }
@@ -171,7 +187,6 @@ br {
 
 
 /****** BEGIN Nav Controls *****/
-$brexit-control-button-size: 28px;
 
 .brexit--nav-controls {
     margin: $baseline*1.5 $brexit-control-button-size*0.5;
@@ -197,25 +212,12 @@ $brexit-control-button-size: 28px;
         }
     }
 }
-.brexit__nav-control--text {
-    @include fs-textSans(3);
-    font-weight: 900;
-    .brexit__nav-control__label {
-        padding: 0 $gutter;
-        width: auto;
-    }
-}
-
 .brexit__nav-control__label {
+    @include button($brexit-control-button-size);
+    @include vertically-center;
+
     position: absolute;
-    top: 50%;
     width: $brexit-control-button-size;
-    height: $brexit-control-button-size;
-    border-radius: $brexit-control-button-size;
-    line-height: $brexit-control-button-size;
-    color: colour(news-main-1);
-    background-color: colour(news-main-2);
-    background-repeat: no-repeat;
     background-size: 30%;
     text-align: center;
 }
@@ -252,31 +254,132 @@ $brexit-control-button-size: 28px;
 
 
 /****** BEGIN Slider ******/
+.brexit--slider {
+    background-color: transparent;
+    padding: 0;
+
+    .brexit__nav-control--prev {
+        left: 0;
+    }
+    .brexit__nav-control--next {
+        right: 0;
+    }
+}
 .brexit__slider-wrapper {
     overflow: hidden;
 }
 .brexit__slider {
-    @include clearfix;
-    position: relative;
-    left: -100%;
-    // currently hard-coded to 3 sliders
-    // TODO: variable number of sliders
+    display: flex;
+    flex-direction: row;
     width: 300%;
+
+    transform: translateX(-33.333%);
+    transition-property: transform;
+    transition-duration: 0.3s;
 }
 .brexit__slider--left {
-    left: 0;
+    transform: translateX(0);
 }
 .brexit__slider--right {
-    left: -200%;
+    transform: translateX(-66.666%);
 }
 .brexit__slider__item {
-    float: left;
-    // currently hard-coded to 3 sliders
-    // TODO: variable number of sliders
-    width: 33.3%;
-}
-/****** END Two-Sided ******/
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 0 $brexit-control-button-size*0.5;
+    padding: 6px 21px;
+    background-color: colour(news-main-1);
 
+    /**
+     * omitting this causes interactive's parent iframe
+     * to become wider than the viewport on iOS
+     */
+    width: 1px;
+}
+/****** END Slider ******/
+
+/****** BEGIN Two-sided ******/
+
+.brexit__two-sided {
+    display: flex;
+    flex-direction: column;
+}
+.brexit__two-sided__row {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+.brexit__two-sided__question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .brexit__header {
+        padding-bottom: 0;
+    }
+}
+.brexit__two-sided__top, .brexit__two-sided__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    min-width: 60%;
+}
+
+.brexit__two-sided__control {
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 0 1 auto;
+
+    &:hover {
+        .brexit__two-sided__button {
+            background-color: #fff;
+        }
+    }
+}
+
+.brexit__two-sided__control--left {
+    justify-content: flex-start;
+}
+
+.brexit__two-sided__control--right {
+    justify-content: flex-end;
+}
+
+$two-sided-button-size: 34px;
+
+.brexit__two-sided__button {
+    @include button($two-sided-button-size);
+    @include fs-header(2);
+    background-size: 12px;
+    color: #333;
+    text-align: center;
+    padding: 5px;
+    min-width: 100%;
+}
+.brexit__two-sided__button--next {
+    padding-right: 32px;
+    background-image: url('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" viewBox="0 0 20 36"><path fill="#00456e" d="M.6 34.4L14.3 18 .6 1.6 2.2 0l17.1 17.1v1.7L2.2 36 .6 34.4z"/></svg>');
+    background-position: 95% 50%;
+}
+
+.brexit__two-sided__button--prev {
+    padding-left: 32px;
+    background-image: url('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="36" viewBox="0 0 20 36"><path fill="#00456e" d="M17.8 36L.6 18.9v-1.7L17.8 0l1.6 1.6L5.7 18l13.7 16.4-1.6 1.6z"/></svg>');
+    background-position: 5% 50%;
+}
+.brexit__two-sided__top {
+    left: -35px;
+    align-self: flex-start;
+}
+.brexit__two-sided__bottom {
+    right: -35px;
+    align-self: flex-end;
+}
+
+/****** END Two-sided ******/
 
 /****** BEGIN Carousel ******/
 .brexit__carousel-slide {
