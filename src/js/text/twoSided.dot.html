@@ -15,6 +15,7 @@
             <div class="brexit__content brexit__slider__item brexit__two-sided">
                 <div class="brexit__two-sided__row brexit__two-sided__top">
                     <a data-answer="one"
+                       data-link-name="{{=it.trackingCode.goToAnswerOne}}"
                        class="brexit__two-sided__control brexit__two-sided__control--left js-go-to-answer">
                         <div class="brexit__two-sided__button brexit__two-sided__button--prev">
                             {{=it.data.answer_1_title}}
@@ -28,6 +29,7 @@
                 </div>
                 <div class="brexit__two-sided__row brexit__two-sided__bottom">
                     <a data-answer="two"
+                       data-link-name="{{=it.trackingCode.goToAnswerTwo}}"
                        class="brexit__two-sided__control brexit__two-sided__control--right js-go-to-answer">
                         <div class="brexit__two-sided__button brexit__two-sided__button--next">
                             {{=it.data.answer_2_title}}
@@ -49,10 +51,10 @@
         </div>
     </div>
 
-    <a data-answer="two" class="brexit__nav-control brexit__nav-control--prev js-back-to-question u-hidden">
+    <a data-answer="two" data-link-name="{{=it.trackingCode.back}}" class="brexit__nav-control brexit__nav-control--prev js-back-to-question u-hidden">
         <div class="brexit__nav-control__label"></div>
     </a>
-    <a data-answer="one" class="brexit__nav-control brexit__nav-control--next js-back-to-question u-hidden">
+    <a data-answer="one" data-link-name="{{=it.trackingCode.back}}" class="brexit__nav-control brexit__nav-control--next js-back-to-question u-hidden">
         <div class="brexit__nav-control__label"></div>
     </a>
 </div>
