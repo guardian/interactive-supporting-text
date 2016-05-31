@@ -70,7 +70,7 @@ window.init = function init(parentEl) {
 
     function getRowById(rows, rowId) {
         const row = rows.reduce((prev, currentRow) => {
-            if (currentRow.id === rowId) {
+            if (currentRow.id.trim() === rowId) {
                 return currentRow;
             }
 
