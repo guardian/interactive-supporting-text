@@ -287,8 +287,14 @@ $brexit-control-button-size: 28px;
     flex-grow: 1;
     flex-basis: 0;
     margin: 0 $brexit-control-button-size*0.5;
-    padding: 6px 0;
+    padding: 6px 21px;
     background-color: colour(news-main-1);
+
+    /**
+     * omitting this causes interactive's parent iframe
+     * to become wider than the viewport on iOS
+     */
+    width: 1px;
 }
 /****** END Slider ******/
 
@@ -365,21 +371,12 @@ $two-sided-button-size: 34px;
     background-position: 5% 50%;
 }
 .brexit__two-sided__top {
-    left: -14px;
+    left: -35px;
     align-self: flex-start;
 }
 .brexit__two-sided__bottom {
-    right: -14px;
+    right: -35px;
     align-self: flex-end;
-}
-
-/*
-    TODO: we are squeezing all content on the two-sided
-        atom as applying padding breaks iOS Safari
-*/
-.squeeze {
-    width: 90%;
-    margin: 0 auto;
 }
 
 /****** END Two-sided ******/
