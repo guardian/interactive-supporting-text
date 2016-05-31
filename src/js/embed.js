@@ -93,8 +93,7 @@ window.init = function init(parentEl) {
                 more: `${trackingCode}__more`,
                 prev: `${trackingCode}__prev`,
                 next: `${trackingCode}__next`,
-                goToAnswerOne: `${trackingCode}__go_to_answer_one`,
-                goToAnswerTwo: `${trackingCode}__go_to_answer_two`,
+                goTo: `${trackingCode}__go_to`,
                 back: `${trackingCode}__back`,
             },
         };
