@@ -14,8 +14,7 @@ Development
 Production / deployment
 -----------------------
 
-1. Update `cfg/s3.json`
-2. `grunt deploy`
+`grunt deploy`
 
 NOTE: Ensure you have AWS credentials setup by either adding them to your `~/.bashrc` or
 creating a `~/.aws/credentials` file with the following content:
