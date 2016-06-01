@@ -63,9 +63,9 @@ function getQueryParams() {
 
 window.init = function init(parentEl) {
     const params = getQueryParams();
-    const isTailored = (params.tailored == 'true');
+    const isTailored = (params.tailored === 'true');
     const defaultLevel = params.default || 'intermediate';
-    const defaultAtomId = params[defaultLevel] || params.id
+    const defaultAtomId = params[defaultLevel] || params.id;
 
     iframeMessenger.enableAutoResize();
     setupVisibilityMonitoring();
