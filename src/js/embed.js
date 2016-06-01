@@ -63,7 +63,9 @@ function getQueryParams() {
 
 window.init = function init(parentEl) {
     const params = getQueryParams();
-    const isTailored = !!params.tailored;
+    const isTailored = (params.tailored === 'true');
+    const defaultLevel = params.default || 'intermediate';
+    const defaultAtomId = params[defaultLevel] || params.id;
 
     iframeMessenger.enableAutoResize();
     setupVisibilityMonitoring();
@@ -135,7 +137,7 @@ window.init = function init(parentEl) {
             throw err;
         }
         const rows = getRows(spreadsheetRes);
-        const level = tailorRes.level || params.default;
+        const level = tailorRes.level || defaultLevel;
         const id = params[level];
         const row = getRowById(rows, id);
         const trackingCode = `brexit__${level}__${id}__tailored`;
@@ -148,7 +150,7 @@ window.init = function init(parentEl) {
             throw err;
         }
         const rows = getRows(spreadsheetRes);
-        const id = params.id;
+        const id = defaultAtomId;
         const row = getRowById(rows, id);
         const trackingCode = `brexit__${row.level}__${id}__untailored`;
 
