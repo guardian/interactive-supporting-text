@@ -435,6 +435,31 @@ $two-sided-button-size: 34px;
 }
 /****** END Carousel ******/
 
+/****** BEGIN Catchup ******/
+
+$catch-up-button-size: 34px;
+
+.brexit__catch-up__control {
+    text-decoration: none;
+
+    &:hover {
+        .brexit__catch-up__button {
+            background-color: #fff;
+        }
+    }
+}
+
+.brexit__catch-up__button {
+    @include button($catch-up-button-size);
+    @include fs-header(2);
+    color: #333;
+    text-align: center;
+    padding: $baseline/2;
+}
+
+/****** END Catchup ******/
+
+
 p, ol, ul {
     @include fs-textSans(3);
     margin: 0 0 $baseline/2 0;
