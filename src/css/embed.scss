@@ -3,13 +3,14 @@
 @import "normalize";
 @import "mq";
 @import "buttons";
-@import "modules/catchMeUp";
 
 @include mq-add-breakpoint(embedded-wide, 465px);
 
 $baseline: 12px;
 $gutter: 10px;
 $shadow-height: 18px;
+
+@import "modules/catchMeUp";
 
 html,
 body {
