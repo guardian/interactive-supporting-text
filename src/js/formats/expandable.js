@@ -16,16 +16,21 @@ export default {
         };
     },
     postRender() {
-        q('.js-expand').forEach(el => el.addEventListener('click', ev => {
-            const readMoreLink = ev.currentTarget;
-
-            q('.js-short-content').forEach(extraContentElement => {
-                extraContentElement.classList.add('u-hidden');
+        q('.js-expand').forEach(el => el.addEventListener('click', () => {
+            q('.js-short-content').forEach(shortContentElement => {
+                shortContentElement.classList.add('u-hidden');
             });
-            q('.js-all-content').forEach(extraContentElement => {
-                extraContentElement.classList.remove('u-hidden');
+            q('.js-all-content').forEach(allContentElement => {
+                allContentElement.classList.remove('u-hidden');
             });
-            readMoreLink.remove();
+        }));
+        q('.js-collapse').forEach(el => el.addEventListener('click', () => {
+            q('.js-all-content').forEach(allContentElement => {
+                allContentElement.classList.add('u-hidden');
+            });
+            q('.js-short-content').forEach(shortContentElement => {
+                shortContentElement.classList.remove('u-hidden');
+            });
         }));
     },
     template: expandableTemplate,
