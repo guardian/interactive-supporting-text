@@ -1,0 +1,18 @@
+.brexit__catch-me-up {
+
+}
+
+.brexit__catch-me-up__header {
+
+}
+
+.brexit__catch-me-up__content {
+
+}
+
+$brexit-catch-me-up-button-size: 34px;
+
+.brexit__catch-me-up__button {
+    @include button-primary($brexit-catch-me-up-button-size, true);
+    display: block;
+}

@@ -3,6 +3,7 @@
 @import "normalize";
 @import "mq";
 @import "buttons";
+@import "modules/catchMeUp";
 
 @include mq-add-breakpoint(embedded-wide, 465px);
 
@@ -102,7 +103,7 @@ br {
     padding-bottom: $baseline * 1.5;
 }
 .brexit__button {
-    @include button-secondary(28px);
+    @include button-secondary(28px, true);
     display: inline-block;
     vertical-align: middle;
     font-weight: 700;
@@ -198,11 +199,10 @@ $brexit-control-button-size: 28px;
     }
 }
 .brexit__nav-control__label {
-    @include button-primary($brexit-control-button-size);
+    @include button-primary($brexit-control-button-size, true);
     @include vertically-center;
 
     position: absolute;
-    width: $brexit-control-button-size;
     background-size: 30%;
     text-align: center;
 }
@@ -419,17 +419,6 @@ $two-sided-button-size: 34px;
     margin: 0;
 }
 /****** END Carousel ******/
-
-/****** BEGIN Catchup ******/
-
-$catch-up-button-size: 28px;
-
-.brexit__catch-up__button {
-    @include button-primary($catch-up-button-size);
-}
-
-/****** END Catchup ******/
-
 
 p, ol, ul {
     @include fs-textSans(3);
