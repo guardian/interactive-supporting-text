@@ -4,6 +4,12 @@ $brexit-catch-me-up-button-size: 34px;
     border-top: 1px solid colour(news-main-2);
     border-bottom: 1px solid colour(news-main-2);
     padding: $baseline 0;
+    display: flex;
+    align-items: center;
+
+    p {
+        margin: 0;
+    }
 }
 
 .brexit__catch-me-up__header {
@@ -13,22 +19,22 @@ $brexit-catch-me-up-button-size: 34px;
 
 .brexit__catch-me-up__content {
     @include fs-textSans(4);
-    color: colour(neutral-1);
+    color: colour(neutral-2);
     font-weight: normal;
-    padding: 0 8px;
+    padding: 0 10px;
+    line-height: 16px;
 }
 
 .brexit__catch-me-up__button {
     @include button-tertiary($brexit-catch-me-up-button-size);
-    @include fs-textSans(2);
+    @include fs-textSans(3);
+    font-weight: bold;
     display: block;
     text-decoration: none;
     text-align: center;
-    padding: 8px 0;
+    padding: 8px $gutter*1.5;
 }
 
-.brexit__catch-me-up__col {
-    display: inline-block;
-    width: 50%;
-    vertical-align: middle;
+.brexit__catch-me-up__col-one {
+    flex-shrink: 0;
 }
