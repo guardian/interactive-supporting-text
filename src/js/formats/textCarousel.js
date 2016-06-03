@@ -14,7 +14,7 @@ export default {
         for (; i <= maxCarouselSize; i += 1) {
             header = data[`headline${i}`];
             content = data[`content${i}`];
-            if (typeof header !== 'undefined' && typeof content !== 'undefined') {
+            if (header || content) {
                 slides.push({ header, content });
             }
         }
