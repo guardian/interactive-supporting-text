@@ -98,6 +98,7 @@ window.init = function init(parentEl) {
                 next: `${trackingCode}__next`,
                 goTo: `${trackingCode}__go_to`,
                 back: `${trackingCode}__back`,
+                catchMeUp: `${trackingCode}__catch_me_up`,
             },
         };
     }

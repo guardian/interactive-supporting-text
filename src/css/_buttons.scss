@@ -1,0 +1,21 @@
+@mixin button($size, $circular: false) {
+    height: $size;
+    border-radius: $size;
+    line-height: $size;
+    @if $circular == true {
+        width: $size;
+    }
+}
+
+@mixin button-primary($size, $circular: false) {
+    @include button($size, $circular);
+    color: colour(news-main-1);
+    background-color: colour(news-main-2);
+    background-repeat: no-repeat;
+}
+
+@mixin button-secondary($size, $circular: false) {
+    @include button($size, $circular);
+    color: colour(news-main-1);
+    background-color: colour(news-support-1);
+}

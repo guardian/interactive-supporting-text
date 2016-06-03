@@ -1,16 +1,12 @@
+@import "variables";
 @import "fonts";
 @import "palette";
 @import "normalize";
-// @import "general";
-// @import "share";
-
 @import "mq";
+@import "buttons";
+@import "modules/catchMeUp";
 
 @include mq-add-breakpoint(embedded-wide, 465px);
-
-$baseline: 12px;
-$gutter: 10px;
-$shadow-height: 18px;
 
 html,
 body {
@@ -67,17 +63,6 @@ br {
     transform: translateY(-50%);
 }
 
-$brexit-control-button-size: 28px;
-
-@mixin button($size) {
-    height: $size;
-    border-radius: $size;
-    line-height: $size;
-    color: colour(news-main-1);
-    background-color: colour(news-main-2);
-    background-repeat: no-repeat;
-}
-
 .u-bold {
     font-weight: 900;
 }
@@ -120,14 +105,10 @@ $brexit-control-button-size: 28px;
     font-weight: bold;
 }
 .brexit__button {
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
+    @include button-secondary(28px, true);
     display: inline-block;
     vertical-align: middle;
     font-weight: 700;
-    background-color: colour(news-support-1);
-    color: colour(news-main-1);
     text-align: center;
     padding: 0 6px;
     svg {
@@ -193,6 +174,8 @@ $brexit-control-button-size: 28px;
 
 /****** BEGIN Nav Controls *****/
 
+$brexit-control-button-size: 28px;
+
 .brexit--nav-controls {
     margin: $baseline*1.5 $brexit-control-button-size*0.5;
 
@@ -218,11 +201,10 @@ $brexit-control-button-size: 28px;
     }
 }
 .brexit__nav-control__label {
-    @include button($brexit-control-button-size);
+    @include button-primary($brexit-control-button-size, true);
     @include vertically-center;
 
     position: absolute;
-    width: $brexit-control-button-size;
     background-size: 30%;
     text-align: center;
 }
@@ -356,7 +338,7 @@ $brexit-control-button-size: 28px;
 $two-sided-button-size: 34px;
 
 .brexit__two-sided__button {
-    @include button($two-sided-button-size);
+    @include button-primary($two-sided-button-size);
     @include fs-header(2);
     background-size: 12px;
     color: #333;
