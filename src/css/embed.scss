@@ -1,10 +1,8 @@
 @import "fonts";
 @import "palette";
 @import "normalize";
-// @import "general";
-// @import "share";
-
 @import "mq";
+@import "buttons";
 
 @include mq-add-breakpoint(embedded-wide, 465px);
 
@@ -67,17 +65,6 @@ br {
     transform: translateY(-50%);
 }
 
-$brexit-control-button-size: 28px;
-
-@mixin button($size) {
-    height: $size;
-    border-radius: $size;
-    line-height: $size;
-    color: colour(news-main-1);
-    background-color: colour(news-main-2);
-    background-repeat: no-repeat;
-}
-
 .u-bold {
     font-weight: 900;
 }
@@ -115,14 +102,10 @@ $brexit-control-button-size: 28px;
     padding-bottom: $baseline * 1.5;
 }
 .brexit__button {
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
+    @include button-secondary(28px);
     display: inline-block;
     vertical-align: middle;
     font-weight: 700;
-    background-color: colour(news-support-1);
-    color: colour(news-main-1);
     text-align: center;
     padding: 0 6px;
     svg {
@@ -188,6 +171,8 @@ $brexit-control-button-size: 28px;
 
 /****** BEGIN Nav Controls *****/
 
+$brexit-control-button-size: 28px;
+
 .brexit--nav-controls {
     margin: $baseline*1.5 $brexit-control-button-size*0.5;
 
@@ -213,7 +198,7 @@ $brexit-control-button-size: 28px;
     }
 }
 .brexit__nav-control__label {
-    @include button($brexit-control-button-size);
+    @include button-primary($brexit-control-button-size);
     @include vertically-center;
 
     position: absolute;
@@ -351,7 +336,7 @@ $brexit-control-button-size: 28px;
 $two-sided-button-size: 34px;
 
 .brexit__two-sided__button {
-    @include button($two-sided-button-size);
+    @include button-primary($two-sided-button-size);
     @include fs-header(2);
     background-size: 12px;
     color: #333;
@@ -437,24 +422,10 @@ $two-sided-button-size: 34px;
 
 /****** BEGIN Catchup ******/
 
-$catch-up-button-size: 34px;
-
-.brexit__catch-up__control {
-    text-decoration: none;
-
-    &:hover {
-        .brexit__catch-up__button {
-            background-color: #fff;
-        }
-    }
-}
+$catch-up-button-size: 28px;
 
 .brexit__catch-up__button {
-    @include button($catch-up-button-size);
-    @include fs-header(2);
-    color: #333;
-    text-align: center;
-    padding: $baseline/2;
+    @include button-primary($catch-up-button-size);
 }
 
 /****** END Catchup ******/
