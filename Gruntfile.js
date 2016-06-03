@@ -232,6 +232,7 @@ module.exports = function(grunt) {
     grunt.registerTask('all', ['embed', 'postcss', 'copy:assets']);
     grunt.registerTask('default', ['clean', 'copy:harness', 'all', 'connect', 'watch']);
     grunt.registerTask('build', ['clean', 'all']);
+    grunt.registerTask('package', ['loadDeployConfig', 'build', 'copy:deploy']);
     grunt.registerTask('deploy', ['loadDeployConfig', 'prompt:visuals', 'build', 'copy:deploy', 'aws_s3', 'boot_url']);
 
     grunt.loadNpmTasks('grunt-aws');
