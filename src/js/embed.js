@@ -93,6 +93,7 @@ window.init = function init(parentEl) {
                 like: `${trackingCode}__like`,
                 dislike: `${trackingCode}__dislike`,
                 more: `${trackingCode}__more`,
+                less: `${trackingCode}__less`,
                 prev: `${trackingCode}__prev`,
                 next: `${trackingCode}__next`,
                 goTo: `${trackingCode}__go_to`,
