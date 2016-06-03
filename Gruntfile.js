@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             },
             harness: {
                 files: ['harness/**/*'],
-                tasks: ['harness']
+                tasks: ['copy:harness']
             }
         },
 
