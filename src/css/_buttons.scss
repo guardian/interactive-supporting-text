@@ -19,3 +19,9 @@
     color: colour(news-main-1);
     background-color: colour(news-support-1);
 }
+
+@mixin button-tertiary($size, $circular: false) {
+    @include button($size, $circular);
+    color: colour(neutral-6);
+    background-color: colour(guardian-brand-dark);
+}
