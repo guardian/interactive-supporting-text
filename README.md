@@ -61,4 +61,5 @@ Test Harness
 ============
 
 * `index.html` - Stripped down test harness. Includes frontend fonts and curl for loading boot.js.
-* [`immersive.html`](http://localhost:8000/immersive.html) - Immersive-style interactive page pulled from theguardian.com
+* `immersive.html` - Immersive-style interactive page pulled from theguardian.com
+* [`interactive.html`](http://localhost:8000/interactive.html) - Interactive page pulled from theguardian.com
