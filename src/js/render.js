@@ -5,12 +5,13 @@ function bindEventHandlers() {
     q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
         const feedbackButton = ev.currentTarget;
         const feedback = feedbackButton.parentNode;
+        const surveyHref = feedbackButton.getAttribute('data-survey-href');
 
-        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, feedbackButton.getAttribute('data-survey-href'));
+        feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, surveyHref);
     }));
 }
 
 export default function render(templateFn, data, parentEl) {
-    parentEl.innerHTML = templateFn(data);
+    parentEl.innerHTML = templateFn(data); // eslint-disable-line no-param-reassign
     bindEventHandlers();
 }
