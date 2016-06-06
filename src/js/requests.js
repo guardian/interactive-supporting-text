@@ -28,12 +28,10 @@ export default {
                 const count = res.viewedTags['politics/eu-referendum'];
                 let level;
 
-                if (count < 5) {
-                    level = 'beginner';
-                } else if (count > 9) {
-                    level = 'advanced';
-                } else {
+                if (count <= 2) {
                     level = 'intermediate';
+                } else {
+                    level = 'advanced';
                 }
                 callback(null, { level });
             },
