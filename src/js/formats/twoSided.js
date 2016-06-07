@@ -1,23 +1,27 @@
 import twoSidedTemplate from '../text/twoSided.dot.html!text';
 import q from '../lib/query';
 import slider from './helpers/slider';
+import markdown from '../lib/markdown';
 
 export default {
     preprocess({
         headline1: question,
-        headline2: answer_1_title,
-        content2: answer_1_body,
-        headline3: answer_2_title,
-        content3: answer_2_body,
+        headline2: answer1Title,
+        headline3: answer2Title,
+        content2,
+        content3,
         survey_like,
         survey_dislike,
     }) {
+        const answer1Body = markdown.getHtmlContentString(content2);
+        const answer2Body = markdown.getHtmlContentString(content3);
+
         return {
             question,
-            answer_1_title,
-            answer_1_body,
-            answer_2_title,
-            answer_2_body,
+            answer1Title,
+            answer1Body,
+            answer2Title,
+            answer2Body,
             survey_like,
             survey_dislike,
         };
