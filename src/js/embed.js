@@ -134,10 +134,12 @@ window.init = function init(parentEl) {
         postRender(rowData);
     }
 
-    function renderTailoredAtom(err, [spreadsheetRes, tailorRes]) {
+    function renderTailoredAtom(err, responses) {
         if (err) {
             throw err;
         }
+        const spreadsheetRes = responses[0];
+        const tailorRes = responses[1];
         const rows = getRows(spreadsheetRes);
         const level = tailorRes.level || defaultLevel;
         const id = params[level];
@@ -147,10 +149,11 @@ window.init = function init(parentEl) {
         doRender(row, trackingCode);
     }
 
-    function renderUntailoredAtom(err, [spreadsheetRes]) {
+    function renderUntailoredAtom(err, responses) {
         if (err) {
             throw err;
         }
+        const spreadsheetRes = responses[0];
         const rows = getRows(spreadsheetRes);
         const id = defaultAtomId;
         const row = getRowById(rows, id);
