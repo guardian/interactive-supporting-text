@@ -19,19 +19,19 @@ export default {
     },
     postRender() {
         const brexitEl = q('.brexit')[0];
-        const $expandLink = q('.js-expand')[0];
-        const $collapseLink = q('.js-collapse')[0];
-        const $shortContent = q('.js-short-content')[0];
+        const expandLink = q('.js-expand')[0];
+        const collapseLink = q('.js-collapse')[0];
+        const shortContent = q('.js-short-content')[0];
         const initialHeight = brexitEl.offsetHeight;
 
         function expand() {
             q('.js-all-content').forEach((el) => {
                 el.classList.remove('u-hidden');
             });
-            $shortContent.classList.add('u-hidden');
+            shortContent.classList.add('u-hidden');
 
             // set to an excessive max height (will be reduced on `transitionend`)
-            brexitEl.style.maxHeight = '800px';
+            brexitEl.style.maxHeight = '1000px';
         }
 
         function collapse() {
@@ -40,15 +40,15 @@ export default {
             q('.js-all-content').forEach((el) => {
                 el.classList.add('u-hidden');
             });
-            $shortContent.classList.remove('u-hidden');
+            shortContent.classList.remove('u-hidden');
         }
 
         brexitEl.style.maxHeight = `${initialHeight}px`;
         brexitEl.addEventListener('transitionend', () => {
             brexitEl.style.maxHeight = `${brexitEl.offsetHeight}px`;
         });
-        $expandLink.addEventListener('click', expand);
-        $collapseLink.addEventListener('click', collapse);
+        expandLink.addEventListener('click', expand);
+        collapseLink.addEventListener('click', collapse);
     },
     template: expandableTemplate,
 };
