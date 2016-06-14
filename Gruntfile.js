@@ -44,7 +44,8 @@ module.exports = function(grunt) {
         },
 
         clean: {
-            build: ['build']
+            build: ['build'],
+            deploy: ['deploy']
         },
 
         sass: {
@@ -87,15 +88,34 @@ module.exports = function(grunt) {
             }
         },
 
+        compress: {
+            riffraff: {
+                options: {
+                    archive: 'tmp/artifacts.zip'
+                },
+                files: [
+                    {cwd: 'deploy', expand: true, src: ['**']}
+                ]
+            }
+        },
+
         copy: {
             harness: {
                 files: [
-                    {expand: true, cwd: 'harness/', src: ['curl.js', 'index.html', 'immersive.html', 'interactive.html'], dest: 'build'},
+                    {
+                        expand: true, cwd: 'harness/',
+                        src: ['curl.js', 'index.html', 'immersive.html', 'interactive.html'],
+                        dest: 'build'
+                    }
                 ]
             },
             assets: {
                 files: [
-                    {expand: true, cwd: 'src/', src: ['assets/**/*'], dest: 'build'},
+                    {
+                        expand: true, cwd: 'src/',
+                        src: ['assets/**/*'],
+                        dest: 'build'
+                    }
                 ]
             },
             deploy: {
@@ -103,14 +123,23 @@ module.exports = function(grunt) {
                     { // BOOT and EMBED
                         expand: true, cwd: 'build/',
                         src: ['boot.js', 'embed.html'],
-                        dest: 'deploy/<%= visuals.timestamp %>'
+                        dest: 'deploy/packages/interactive-brexit-companion'
                     },
                     { // ASSETS
                         expand: true, cwd: 'build/',
-                        src: ['main.js', 'main.css', 'main.js.map', 'main.css.map',
-                            'embed.js', 'embed.css', 'embed.js.map', 'embed.css.map',
-                            'assets/**/*'],
-                        dest: 'deploy/<%= visuals.timestamp %>/<%= visuals.timestamp %>'
+                        src: [
+                                'main.js', 'main.css',
+                                'main.js.map', 'main.css.map',
+                                'embed.js', 'embed.css',
+                                'embed.js.map', 'embed.css.map',
+                                'assets/**/*'
+                        ],
+                        dest: 'deploy/packages/interactive-brexit-companion/<%= visuals.timestamp %>'
+                    },
+                    {
+                        expand: true, cwd: '.',
+                        src: ['deploy.json'],
+                        dest: 'deploy'
                     }
                 ]
             }
@@ -218,7 +247,7 @@ module.exports = function(grunt) {
             jspmFlags: '-m',
             assetPath: '<%= visuals.timestamp %>'
         });
-    })
+    });
 
     grunt.registerTask('boot_url', function() {
         grunt.log.write('\nBOOT URL: '['green'].bold)
@@ -226,15 +255,23 @@ module.exports = function(grunt) {
 
         grunt.log.write('\nEMBED URL: '['green'].bold)
         grunt.log.writeln(grunt.template.process('<%= visuals.s3.domain %><%= visuals.s3.path %>/embed/embed.html'))
-    })
+    });
+
+    grunt.registerTask('write_upload', function() {
+        var path = require('path');
+        var artefactPath = path.resolve('tmp/artifacts.zip');
+        grunt.log.write("##teamcity[publishArtifacts '" + artefactPath + "']")
+
+    });
 
     grunt.registerTask('embed', ['shell:embed', 'template:embed', 'sass:embed']);
     grunt.registerTask('all', ['embed', 'postcss', 'copy:assets']);
     grunt.registerTask('default', ['clean', 'copy:harness', 'all', 'connect', 'watch']);
-    grunt.registerTask('build', ['clean', 'all']);
-    grunt.registerTask('package', ['loadDeployConfig', 'build', 'copy:deploy']);
+    grunt.registerTask('build', ['clean:build', 'all']);
+    grunt.registerTask('package', ['loadDeployConfig', 'clean:deploy', 'build', 'copy:deploy', 'compress:riffraff', 'write_upload']);
     grunt.registerTask('deploy', ['loadDeployConfig', 'prompt:visuals', 'build', 'copy:deploy', 'aws_s3', 'boot_url']);
 
     grunt.loadNpmTasks('grunt-aws');
 
 }
+

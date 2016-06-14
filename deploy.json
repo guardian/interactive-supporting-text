@@ -1,0 +1,31 @@
+{
+    "defaultStacks": [ "interactives" ],
+    "packages":{
+        "interactive-brexit-companion":{
+            "type":"aws-s3",
+            "data":{
+                "prefixStage": false,
+                "prefixPackage": false,
+                "pathPrefixResource": "s3-path-prefix",
+                "bucket": "gdn-cdn",
+                "cacheControl": [
+                {
+                    "pattern": "^\\d+/",
+                    "value": "max-age=315360000"
+                },
+                {
+                    "pattern": ".*",
+                    "value": "max-age=60"
+                }]
+            }
+        }
+    },
+    "recipes":{
+        "default":{
+            "depends" : ["staticFilesUpload"]
+        },
+        "staticFilesUpload":{
+            "actionsBeforeApp": ["interactive-brexit-companion.uploadStaticFiles"]
+        }
+    }
+}
