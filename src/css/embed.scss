@@ -3,9 +3,9 @@
 @import "palette";
 @import "normalize";
 @import "mq";
-@import "buttons";
-@import "clearfix";
-@import "verticallyCenter";
+@import "mixins/buttons";
+@import "mixins/clearfix";
+@import "mixins/verticallyCenter";
 @import "modules/brexit";
 @import "modules/feedback";
 @import "modules/navControls";
