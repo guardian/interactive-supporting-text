@@ -15,17 +15,9 @@
 .brexit__slider {
     display: flex;
     flex-direction: row;
-    width: 300%;
 
-    transform: translateX(-33.333%);
     transition-property: transform;
     transition-duration: 0.3s;
-}
-.brexit__slider--left {
-    transform: translateX(0);
-}
-.brexit__slider--right {
-    transform: translateX(-66.666%);
 }
 .brexit__slider__item {
     flex-grow: 1;

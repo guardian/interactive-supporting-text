@@ -1,6 +1,6 @@
 import twoSidedTemplate from '../text/twoSided.dot.html!text';
 import q from '../lib/query';
-import slider from './helpers/slider';
+import createSlider from './helpers/slider';
 import markdown from '../lib/markdown';
 
 export default {
@@ -27,6 +27,11 @@ export default {
         };
     },
     postRender() {
+        const slider = createSlider({
+            length: 3,
+            initialSlide: 2,
+        });
+
         function goToAnswer(answer) {
             q(`.js-back-to-question[data-answer="${answer}"]`).forEach(el => {
                 el.classList.remove('u-hidden');
