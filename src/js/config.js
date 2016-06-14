@@ -18,7 +18,7 @@ System.config({
     "json": "github:systemjs/plugin-json@0.1.2",
     "olado/doT": "github:olado/doT@1.0.1",
     "reqwest": "github:ded/reqwest@1.1.5",
-    "text": "github:systemjs/plugin-text@0.0.2",
+    "text": "github:systemjs/plugin-text@0.0.8",
     "traceur": "github:jmcriffey/bower-traceur@0.0.93",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.93",
     "npm:async.eachof@0.5.2": {
