@@ -1,0 +1,42 @@
+.brexit--slider {
+    background-color: transparent;
+    padding: 0;
+
+    .brexit__nav-control--prev {
+        left: 0;
+    }
+    .brexit__nav-control--next {
+        right: 0;
+    }
+}
+.brexit__slider-wrapper {
+    overflow: hidden;
+}
+.brexit__slider {
+    display: flex;
+    flex-direction: row;
+    width: 300%;
+
+    transform: translateX(-33.333%);
+    transition-property: transform;
+    transition-duration: 0.3s;
+}
+.brexit__slider--left {
+    transform: translateX(0);
+}
+.brexit__slider--right {
+    transform: translateX(-66.666%);
+}
+.brexit__slider__item {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 0 $brexit-control-button-size*0.5;
+    padding: 6px 21px;
+    background-color: colour(news-main-1);
+
+    /**
+     * omitting this causes interactive's parent iframe
+     * to become wider than the viewport on iOS
+     */
+    width: 1px;
+}
