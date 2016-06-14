@@ -102,12 +102,20 @@ module.exports = function(grunt) {
         copy: {
             harness: {
                 files: [
-                    {expand: true, cwd: 'harness/', src: ['curl.js', 'index.html', 'immersive.html', 'interactive.html'], dest: 'build'},
+                    {
+                        expand: true, cwd: 'harness/',
+                        src: ['curl.js', 'index.html', 'immersive.html', 'interactive.html'],
+                        dest: 'build'
+                    }
                 ]
             },
             assets: {
                 files: [
-                    {expand: true, cwd: 'src/', src: ['assets/**/*'], dest: 'build'},
+                    {
+                        expand: true, cwd: 'src/',
+                        src: ['assets/**/*'],
+                        dest: 'build'
+                    }
                 ]
             },
             deploy: {
@@ -119,12 +127,17 @@ module.exports = function(grunt) {
                     },
                     { // ASSETS
                         expand: true, cwd: 'build/',
-                        src: ['main.js', 'main.css', 'main.js.map', 'main.css.map',
-                            'embed.js', 'embed.css', 'embed.js.map', 'embed.css.map',
-                            'assets/**/*'],
+                        src: [
+                                'main.js', 'main.css',
+                                'main.js.map', 'main.css.map',
+                                'embed.js', 'embed.css',
+                                'embed.js.map', 'embed.css.map',
+                                'assets/**/*'
+                        ],
                         dest: 'deploy/packages/interactive-brexit-companion/<%= visuals.timestamp %>'
                     },
-                    {   expand: true, cwd: '.',
+                    {
+                        expand: true, cwd: '.',
                         src: ['deploy.json'],
                         dest: 'deploy'
                     }
