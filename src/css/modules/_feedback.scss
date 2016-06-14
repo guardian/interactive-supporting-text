@@ -1,4 +1,4 @@
-.brexit__button {
+.explainer__button {
     @include button-secondary(28px, true);
     display: inline-block;
     vertical-align: middle;
@@ -22,25 +22,25 @@
         background-color: #ffffff;
     }
 }
-.brexit__button--dislike {
+.explainer__button--dislike {
     margin-left: 3px;
     svg {
         transform: rotate(180deg);
     }
 }
-.brexit__button--survey {
+.explainer__button--survey {
     padding: 0;
     svg {
         // Height has to be set for mobile browsers, for some reason
         height: 28px;
     }
 }
-.brexit__feedback {
+.explainer__feedback {
     @include fs-textSans(2);
     margin-top: $baseline;
     text-align: right;
 }
-.brexit__feedback-question,
-.brexit__feedback-answer {
+.explainer__feedback-question,
+.explainer__feedback-answer {
     padding-right: $gutter / 2;
 }
