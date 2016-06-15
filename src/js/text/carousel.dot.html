@@ -1,22 +1,25 @@
 <div class="explainer explainer--nav-controls">
-    <ol class="explainer__content">
-        {{~it.data.slides :value:index}}
-        <li class="explainer__carousel-slide{{? index===0}} explainer__carousel-slide--current js-current{{?}}" id="carousel-slide-{{=index}}">
-            {{? typeof value.header !== 'undefined'}}
-            <h1 class="explainer__header">
-                {{=value.header}}
-            </h1>
-            {{?? value.bigNumber}}
-            <p class="explainer__carousel-header">
-                {{=value.bigNumber}}
-            </p>
-            {{?}}
-            <p class="explainer__carousel-text">
-                {{=value.content}}
-            </p>
-        </li>
-        {{~}}
-    </ol>
+    <div class="explainer__slider-wrapper">
+        <ol class="explainer__slider explainer__carousel js-slider">
+            {{~it.data.slides :value:index}}
+            <li class="explainer__slider__item explainer__content"
+                id="carousel-slide-{{=index}}">
+                {{? typeof value.header !== 'undefined'}}
+                <h1 class="explainer__header">
+                    {{=value.header}}
+                </h1>
+                {{?? value.bigNumber}}
+                <p class="explainer__carousel-header">
+                    {{=value.bigNumber}}
+                </p>
+                {{?}}
+                <p class="explainer__carousel-text">
+                    {{=value.content}}
+                </p>
+            </li>
+            {{~}}
+        </ol>
+    </div>
     <a class="explainer__nav-control explainer__nav-control--prev js-prev" data-link-name="{{=it.trackingCode.prev}}">
         <div class="explainer__nav-control__label"></div>
     </a>

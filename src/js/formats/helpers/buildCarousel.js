@@ -1,25 +1,18 @@
 import q from '../../lib/query';
+import buildSlider from './slider';
 
-export default function buildCarousel(slideCount) {
-    let currentSlide = 0;
+export default function buildCarousel(length) {
+    const slider = buildSlider({
+        length,
+    });
 
-    function clearCurrent() {
-        q('.js-current').forEach((el) => {
-            el.classList.remove('js-current');
-            el.classList.remove('explainer__carousel-slide--current');
-        });
+    function updateIndicator(currentSlide) {
         q('.js-active').forEach((el) => {
             el.classList.remove('explainer__carousel-indicator--active');
             el.classList.remove('js-active');
             el.classList.add('explainer__carousel-indicator--passive');
         });
-    }
 
-    function setCurrent() {
-        q(`#carousel-slide-${currentSlide}`).forEach((el) => {
-            el.classList.add('js-current');
-            el.classList.add('explainer__carousel-slide--current');
-        });
         q(`#carousel-indicator-${currentSlide}`).forEach((el) => {
             el.children[0].classList.add('explainer__carousel-indicator--active');
             el.children[0].classList.add('js-active');
@@ -27,24 +20,16 @@ export default function buildCarousel(slideCount) {
         });
     }
 
-    function isFirstSlide() {
-        return (currentSlide <= 0);
-    }
-
-    function isLastSlide() {
-        return (currentSlide >= slideCount - 1);
-    }
-
     function setControlsVisibility() {
         q('.js-prev').forEach((el) => {
-            if (isFirstSlide()) {
+            if (slider.isFirstSlide()) {
                 el.classList.add('u-hidden');
             } else {
                 el.classList.remove('u-hidden');
             }
         });
         q('.js-next').forEach((el) => {
-            if (isLastSlide()) {
+            if (slider.isLastSlide()) {
                 el.classList.add('u-hidden');
             } else {
                 el.classList.remove('u-hidden');
@@ -52,49 +37,37 @@ export default function buildCarousel(slideCount) {
         });
     }
 
-    function updateSlides() {
-        clearCurrent();
-        setCurrent();
+    function updateControls() {
+        updateIndicator(slider.getCurrentSlide());
         setControlsVisibility();
     }
 
-    function showPreviousSlide() {
-        currentSlide -= 1;
-        updateSlides();
+    function bindEventHandlers() {
+        q('.js-prev').forEach((el) => {
+            el.addEventListener('click', () => {
+                slider.slideLeft();
+                updateControls();
+            });
+        });
+
+        q('.js-next').forEach((el) => {
+            el.addEventListener('click', () => {
+                slider.slideRight();
+                updateControls();
+            });
+        });
+
+        q('.js-indicator').forEach((el) => {
+            el.addEventListener('click', () => {
+                const elementId = el.id || el.parentNode.id;
+                const newSlideIndex = elementId.split(/carousel-indicator-/)[1];
+
+                slider.gotoSlide(parseInt(newSlideIndex, 10));
+                updateControls();
+            });
+        });
     }
 
-    function showNextSlide() {
-        currentSlide += 1;
-        updateSlides();
-    }
-
+    bindEventHandlers();
     setControlsVisibility();
-
-    q('.js-prev').forEach((el) => {
-        el.addEventListener('click', () => {
-            if (isFirstSlide()) {
-                return;
-            }
-            showPreviousSlide();
-        });
-    });
-
-    q('.js-next').forEach((el) => {
-        el.addEventListener('click', () => {
-            if (isLastSlide()) {
-                return;
-            }
-            showNextSlide();
-        });
-    });
-
-    q('.js-indicator').forEach((el) => {
-        el.addEventListener('click', () => {
-            const elementId = el.id || el.parentNode.id;
-            const newSlideIndex = elementId.split(/carousel-indicator-/)[1];
-
-            currentSlide = parseInt(newSlideIndex, 10);
-            updateSlides();
-        });
-    });
 }

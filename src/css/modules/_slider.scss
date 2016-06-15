@@ -15,6 +15,7 @@
 .explainer__slider {
     display: flex;
     flex-direction: row;
+    margin: 0;
 
     transition-property: transform;
     transition-duration: 0.3s;
