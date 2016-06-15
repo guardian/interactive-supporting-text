@@ -6,24 +6,24 @@ export default function buildCarousel(slideCount) {
     function clearCurrent() {
         q('.js-current').forEach((el) => {
             el.classList.remove('js-current');
-            el.classList.remove('brexit__carousel-slide--current');
+            el.classList.remove('explainer__carousel-slide--current');
         });
         q('.js-active').forEach((el) => {
-            el.classList.remove('brexit__carousel-indicator--active');
+            el.classList.remove('explainer__carousel-indicator--active');
             el.classList.remove('js-active');
-            el.classList.add('brexit__carousel-indicator--passive');
+            el.classList.add('explainer__carousel-indicator--passive');
         });
     }
 
     function setCurrent() {
         q(`#carousel-slide-${currentSlide}`).forEach((el) => {
             el.classList.add('js-current');
-            el.classList.add('brexit__carousel-slide--current');
+            el.classList.add('explainer__carousel-slide--current');
         });
         q(`#carousel-indicator-${currentSlide}`).forEach((el) => {
-            el.children[0].classList.add('brexit__carousel-indicator--active');
+            el.children[0].classList.add('explainer__carousel-indicator--active');
             el.children[0].classList.add('js-active');
-            el.children[0].classList.remove('brexit__carousel-indicator--passive');
+            el.children[0].classList.remove('explainer__carousel-indicator--passive');
         });
     }
 

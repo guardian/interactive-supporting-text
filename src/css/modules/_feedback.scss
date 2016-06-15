@@ -1,0 +1,46 @@
+.explainer__button {
+    @include button-secondary(28px, true);
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 6px;
+    svg {
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        fill: colour(news-main-1);
+        // Height has to be set for mobile browsers, for some reason
+        height: 16px;
+        width: auto;
+        path {
+            fill: colour(news-main-1);
+        }
+    }
+
+    &:hover {
+        background-color: #ffffff;
+    }
+}
+.explainer__button--dislike {
+    margin-left: 3px;
+    svg {
+        transform: rotate(180deg);
+    }
+}
+.explainer__button--survey {
+    padding: 0;
+    svg {
+        // Height has to be set for mobile browsers, for some reason
+        height: 28px;
+    }
+}
+.explainer__feedback {
+    @include fs-textSans(2);
+    margin-top: $baseline;
+    text-align: right;
+}
+.explainer__feedback-question,
+.explainer__feedback-answer {
+    padding-right: $gutter / 2;
+}

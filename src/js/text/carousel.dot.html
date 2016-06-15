@@ -1,36 +1,36 @@
-<div class="brexit brexit--nav-controls">
-    <ol class="brexit__content">
+<div class="explainer explainer--nav-controls">
+    <ol class="explainer__content">
         {{~it.data.slides :value:index}}
-        <li class="brexit__carousel-slide{{? index===0}} brexit__carousel-slide--current js-current{{?}}" id="carousel-slide-{{=index}}">
+        <li class="explainer__carousel-slide{{? index===0}} explainer__carousel-slide--current js-current{{?}}" id="carousel-slide-{{=index}}">
             {{? typeof value.header !== 'undefined'}}
-            <h1 class="brexit__header">
+            <h1 class="explainer__header">
                 {{=value.header}}
             </h1>
             {{?? value.bigNumber}}
-            <p class="brexit__carousel-header">
+            <p class="explainer__carousel-header">
                 {{=value.bigNumber}}
             </p>
             {{?}}
-            <p class="brexit__carousel-text">
+            <p class="explainer__carousel-text">
                 {{=value.content}}
             </p>
         </li>
         {{~}}
     </ol>
-    <a class="brexit__nav-control brexit__nav-control--prev js-prev" data-link-name="{{=it.trackingCode.prev}}">
-        <div class="brexit__nav-control__label"></div>
+    <a class="explainer__nav-control explainer__nav-control--prev js-prev" data-link-name="{{=it.trackingCode.prev}}">
+        <div class="explainer__nav-control__label"></div>
     </a>
-    <a class="brexit__nav-control brexit__nav-control--next js-next" data-link-name="{{=it.trackingCode.next}}">
-        <div class="brexit__nav-control__label"></div>
+    <a class="explainer__nav-control explainer__nav-control--next js-next" data-link-name="{{=it.trackingCode.next}}">
+        <div class="explainer__nav-control__label"></div>
     </a>
-    <div class="brexit__carousel-indicators">
+    <div class="explainer__carousel-indicators">
         {{~it.data.slides :value:index}}
-        <a id="carousel-indicator-{{=index}}" class="brexit__carousel-indicator--hit js-indicator" data-link-name="{{=it.trackingCode.goTo}}_slide_{{=index}}">
-            <div class="brexit__carousel-indicator{{? index===0}} brexit__carousel-indicator--active js-active{{??}} brexit__carousel-indicator--passive{{?}}"></div>
+        <a id="carousel-indicator-{{=index}}" class="explainer__carousel-indicator--hit js-indicator" data-link-name="{{=it.trackingCode.goTo}}_slide_{{=index}}">
+            <div class="explainer__carousel-indicator{{? index===0}} explainer__carousel-indicator--active js-active{{??}} explainer__carousel-indicator--passive{{?}}"></div>
         </a>
         {{~}}
     </div>
-    <div class="brexit__content brexit__feedback">
+    <div class="explainer__content explainer__feedback">
         {{#def.feedback}}
     </div>
 </div>

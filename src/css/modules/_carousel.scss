@@ -1,0 +1,51 @@
+.explainer__carousel-slide {
+    width: 100%;
+    list-style: none;
+    display: none;
+}
+
+.explainer__carousel-slide--current {
+    display: block;
+}
+
+.explainer__carousel-indicators {
+    text-align: center;
+    padding: 0;
+    margin: $baseline 0;
+    line-height: 0;
+}
+
+.explainer__carousel-indicator--hit {
+    display: inline-block;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.explainer__carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.explainer__carousel-indicator--active {
+    background-color: #fff;
+}
+
+.explainer__carousel-indicator--passive {
+    background-color: colour(news-support-1);
+    opacity: .5;
+}
+
+.explainer__carousel-header {
+    @include fs-headline(5);
+    .big-number {
+        font-weight: 900;
+        font-size: 72px;
+        line-height: 72px;
+    }
+    margin: $baseline 0 0 0;
+}
+
+.explainer__carousel-text {
+    margin: 0;
+}

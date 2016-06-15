@@ -1,6 +1,6 @@
-$brexit-catch-me-up-button-size: 34px;
+$explainer-catch-me-up-button-size: 34px;
 
-.brexit__catch-me-up {
+.explainer__catch-me-up {
     border-top: 1px solid colour(news-main-2);
     border-bottom: 1px solid colour(news-main-2);
     padding: $baseline 0;
@@ -12,12 +12,12 @@ $brexit-catch-me-up-button-size: 34px;
     }
 }
 
-.brexit__catch-me-up__header {
+.explainer__catch-me-up__header {
     @include fs-header(5);
     color: colour(news-main-2);
 }
 
-.brexit__catch-me-up__content {
+.explainer__catch-me-up__content {
     @include fs-textSans(4);
     color: colour(neutral-2);
     font-weight: normal;
@@ -25,8 +25,8 @@ $brexit-catch-me-up-button-size: 34px;
     line-height: 16px;
 }
 
-.brexit__catch-me-up__button {
-    @include button-tertiary($brexit-catch-me-up-button-size);
+.explainer__catch-me-up__button {
+    @include button-tertiary($explainer-catch-me-up-button-size);
     @include fs-textSans(3);
     font-weight: bold;
     display: block;
@@ -35,6 +35,6 @@ $brexit-catch-me-up-button-size: 34px;
     padding: 8px $gutter*1.5;
 }
 
-.brexit__catch-me-up__col-one {
+.explainer__catch-me-up__col-one {
     flex-shrink: 0;
 }
