@@ -257,11 +257,10 @@ module.exports = function(grunt) {
         grunt.log.writeln(grunt.template.process('<%= visuals.s3.domain %><%= visuals.s3.path %>/embed/embed.html'))
     });
 
-    grunt.registerTask('write_upload', function() {
-        var path = require('path');
-        var artefactPath = path.resolve('tmp/artifacts.zip');
-        grunt.log.write("##teamcity[publishArtifacts '" + artefactPath + "']")
-
+    grunt.registerTask('write_upload', () => {
+        const path = require('path');
+        const artefactPath = path.resolve('tmp/artifacts.zip');
+        grunt.log.write(`##teamcity[publishArtifacts '${artefactPath}']`);
     });
 
     grunt.registerTask('embed', ['shell:embed', 'template:embed', 'sass:embed']);
@@ -270,8 +269,4 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['clean:build', 'all']);
     grunt.registerTask('package', ['loadDeployConfig', 'clean:deploy', 'build', 'copy:deploy', 'compress:riffraff', 'write_upload']);
     grunt.registerTask('deploy', ['loadDeployConfig', 'prompt:visuals', 'build', 'copy:deploy', 'aws_s3', 'boot_url']);
-
-    grunt.loadNpmTasks('grunt-aws');
-
-}
-
+};
