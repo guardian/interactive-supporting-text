@@ -6,6 +6,7 @@
             "data":{
                 "prefixStage": false,
                 "prefixPackage": false,
+                "prefixStack": false,
                 "pathPrefixResource": "s3-path-prefix",
                 "bucket": "gdn-cdn",
                 "cacheControl": [
