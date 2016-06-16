@@ -29,7 +29,7 @@ export default {
     postRender() {
         const slider = createSlider({
             length: 3,
-            initialSlide: 2,
+            initialSlide: 1,
         });
 
         function goToAnswer(answer) {
