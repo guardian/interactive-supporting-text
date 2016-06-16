@@ -28,7 +28,7 @@
     </a>
     <div class="explainer__carousel-indicators">
         {{~it.data.slides :value:index}}
-        <a id="carousel-indicator-{{=index}}" class="explainer__carousel-indicator--hit js-indicator" data-link-name="{{=it.trackingCode.goTo}}_slide_{{=index}}">
+        <a id="carousel-indicator-{{=index}}" class="explainer__carousel-indicator--hit js-indicator" data-slide-index="{{=index}}" data-link-name="{{=it.trackingCode.goTo}}_slide_{{=index}}">
             <div class="explainer__carousel-indicator{{? index===0}} explainer__carousel-indicator--active js-active{{??}} explainer__carousel-indicator--passive{{?}}"></div>
         </a>
         {{~}}

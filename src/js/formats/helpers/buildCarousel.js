@@ -59,8 +59,8 @@ export default function buildCarousel(length) {
 
         q('.js-indicator').forEach((el) => {
             el.addEventListener('click', () => {
-                const elementId = el.id || el.parentNode.id;
-                const newSlideIndex = elementId.split(/carousel-indicator-/)[1];
+                const newSlideIndex = (el.dataset && el.dataset.slideIndex) ||
+                    el.parentNode.dataset.slideIndex;
 
                 slider.gotoSlide(parseInt(newSlideIndex, 10));
                 updateControls();
