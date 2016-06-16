@@ -120,10 +120,15 @@ module.exports = function(grunt) {
             },
             deploy: {
                 files: [
-                    { // BOOT and EMBED
+                    { // BOOT
                         expand: true, cwd: 'build/',
-                        src: ['boot.js', 'embed.html'],
+                        src: ['boot.js'],
                         dest: 'deploy/packages/interactive-brexit-companion'
+                    },
+                    { // EMBED
+                        expand: true, cwd: 'build/',
+                        src: ['embed.html'],
+                        dest: 'deploy/packages/interactive-brexit-companion/embed'
                     },
                     { // ASSETS
                         expand: true, cwd: 'build/',
@@ -211,7 +216,7 @@ module.exports = function(grunt) {
                     },
                     { // EMBED
                         expand: true,
-                        cwd: 'deploy/<%= visuals.timestamp %>',
+                        cwd: 'deploy/<%= visuals.timestamp %>/embed',
                         src: ['embed.html'],
                         dest: '<%= visuals.s3.path %>/embed',
                         params: { CacheControl: 'max-age=60' }
