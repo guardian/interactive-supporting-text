@@ -74,6 +74,7 @@ module.exports = function(grunt) {
             'options': {
                 'data': {
                     'assetPath': '<%= visuals.assetPath %>',
+                    'gitCommitId': '<%= process.env.BUILD_VCS_NUMBER %>'
                 }
             },
             'bootjs': {
