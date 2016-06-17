@@ -70,23 +70,23 @@ module.exports = function(grunt) {
             }
         },
 
-        'template': {
-            'options': {
-                'data': {
-                    'assetPath': '<%= visuals.assetPath %>',
-                    'gitCommitId': '<%= process.env.BUILD_VCS_NUMBER %>'
-                }
+        template: {
+            options: {
+                data: {
+                    assetPath: '<%= visuals.assetPath %>',
+                    gitCommitId: process.env.BUILD_VCS_NUMBER,
+                },
             },
-            'bootjs': {
-                'files': {
+            bootjs: {
+                files: {
                     'build/boot.js': ['src/js/boot.js.tpl'],
-                }
+                },
             },
-            'embed': {
-                'files': {
-                    'build/embed.html': ['src/embed.html']
-                }
-            }
+            embed: {
+                files: {
+                    'build/embed.html': ['src/embed.html'],
+                },
+            },
         },
 
         compress: {
@@ -251,7 +251,7 @@ module.exports = function(grunt) {
             s3: grunt.file.readJSON('./cfg/s3.json'),
             timestamp: Date.now(),
             jspmFlags: '-m',
-            assetPath: '<%= visuals.timestamp %>'
+            assetPath: '<%= visuals.timestamp %>',
         });
     });
 
