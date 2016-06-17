@@ -13,7 +13,7 @@ export default function buildCarousel(length) {
             el.classList.add('explainer__carousel-indicator--passive');
         });
 
-        q(`#carousel-indicator-${currentSlide}`).forEach((el) => {
+        q(`.js-indicator[data-slide-index="${currentSlide}"]`).forEach((el) => {
             el.children[0].classList.add('explainer__carousel-indicator--active');
             el.children[0].classList.add('js-active');
             el.children[0].classList.remove('explainer__carousel-indicator--passive');
