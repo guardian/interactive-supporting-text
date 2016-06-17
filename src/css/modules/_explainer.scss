@@ -4,7 +4,6 @@
     background-color: colour(news-main-1);
     color: #ffffff;
     position: relative;
-    transition: max-height .3s ease 0s;
 
     &:before, &:after {
         content: '';

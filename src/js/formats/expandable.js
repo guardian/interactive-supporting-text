@@ -18,37 +18,22 @@ export default {
         };
     },
     postRender() {
-        const explainerEl = q('.explainer')[0];
-        const expandLink = q('.js-expand')[0];
-        const collapseLink = q('.js-collapse')[0];
-        const shortContent = q('.js-short-content')[0];
-        const initialHeight = explainerEl.offsetHeight;
-
-        function expand() {
-            q('.js-all-content').forEach((el) => {
-                el.classList.remove('u-hidden');
+        q('.js-expand').forEach(el => el.addEventListener('click', () => {
+            q('.js-short-content').forEach(shortContentElement => {
+                shortContentElement.classList.add('u-hidden');
             });
-            shortContent.classList.add('u-hidden');
-
-            // set to an excessive max height (will be reduced on `transitionend`)
-            explainerEl.style.maxHeight = '1000px';
-        }
-
-        function collapse() {
-            explainerEl.style.height = `${explainerEl.offsetHeight}px`;
-            explainerEl.style.maxHeight = `${initialHeight}px`;
-            q('.js-all-content').forEach((el) => {
-                el.classList.add('u-hidden');
+            q('.js-all-content').forEach(allContentElement => {
+                allContentElement.classList.remove('u-hidden');
             });
-            shortContent.classList.remove('u-hidden');
-        }
-
-        explainerEl.style.maxHeight = `${initialHeight}px`;
-        explainerEl.addEventListener('transitionend', () => {
-            explainerEl.style.maxHeight = `${explainerEl.offsetHeight}px`;
-        });
-        expandLink.addEventListener('click', expand);
-        collapseLink.addEventListener('click', collapse);
+        }));
+        q('.js-collapse').forEach(el => el.addEventListener('click', () => {
+            q('.js-all-content').forEach(allContentElement => {
+                allContentElement.classList.add('u-hidden');
+            });
+            q('.js-short-content').forEach(shortContentElement => {
+                shortContentElement.classList.remove('u-hidden');
+            });
+        }));
     },
     template: expandableTemplate,
 };
