@@ -10,14 +10,15 @@
                 "pathPrefixResource": "s3-path-prefix",
                 "bucket": "gdn-cdn",
                 "cacheControl": [
-                {
-                    "pattern": "^\\d+/",
-                    "value": "max-age=315360000"
-                },
-                {
-                    "pattern": ".*",
-                    "value": "max-age=60"
-                }]
+                    {
+                        "pattern": "embed\\.html",
+                        "value": "max-age=60"
+                    },
+                    {
+                        "pattern": ".*",
+                        "value": "max-age=315360000"
+                    }
+                ]
             }
         }
     },
