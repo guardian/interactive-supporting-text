@@ -14,40 +14,6 @@ if (!('remove' in Element.prototype)) {
     };
 }
 
-let visible;
-
-function setupVisibilityMonitoring() {
-    iframeMessenger.monitorPosition(data => {
-        function isVisible(threshold = 1) {
-            const width = data.iframeRight - data.iframeLeft;
-            const height = data.iframeBottom - data.iframeTop;
-
-            return (
-                data.iframeLeft >= -(width * (1 - threshold)) &&
-                data.iframeTop >= -(height * (1 - threshold)) &&
-                data.iframeRight <= data.innerWidth + (width * (1 - threshold)) &&
-                data.iframeBottom <= data.innerHeight + (height * (1 - threshold))
-            );
-        }
-
-        function hasVisibilityChanged() {
-            const wasVisible = visible;
-
-            visible = isVisible(0.5);
-
-            return (wasVisible !== visible);
-        }
-
-        if (hasVisibilityChanged()) {
-            if (visible) {
-                // TODO: track visibility change
-            } else {
-                // TODO: track visibility change
-            }
-        }
-    });
-}
-
 function getQueryParams() {
     const query = window.location.search.replace('?', '').split('&');
     const params = {};
@@ -68,7 +34,6 @@ window.init = function init(parentEl) {
     const defaultAtomId = params[defaultLevel] || params.id;
 
     iframeMessenger.enableAutoResize();
-    setupVisibilityMonitoring();
 
     function getRowById(rows, rowId) {
         const row = rows.reduce((prev, currentRow) => {
