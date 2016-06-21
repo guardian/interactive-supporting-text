@@ -1,3 +1,4 @@
+import './lib/shims';
 import iframeMessenger from 'guardian/iframe-messenger';
 import dot from 'olado/doT';
 import parallel from 'async.parallel';
@@ -6,13 +7,6 @@ import feedback from './text/feedback.dot.partial.html!text';
 import render from './render';
 import requests from './requests';
 
-if (!('remove' in Element.prototype)) {
-    Element.prototype.remove = function remove() {
-        if (this.parentNode) {
-            this.parentNode.removeChild(this);
-        }
-    };
-}
 
 function getQueryParams() {
     const query = window.location.search.replace('?', '').split('&');
