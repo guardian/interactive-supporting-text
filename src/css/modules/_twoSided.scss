@@ -4,6 +4,9 @@ $two-sided-button-size: 34px;
     display: flex;
     flex-direction: column;
 }
+.explainer__two-sided__item {
+    margin: 0 $explainer-control-button-size*0.5;
+}
 .explainer__two-sided__row {
     flex-grow: 1;
     flex-shrink: 1;
