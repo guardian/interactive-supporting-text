@@ -1,11 +1,11 @@
 {
     "checkpoints": {
         "PROD": {
-            "url": "https://interactive.guim.co.uk/2016/05/brexit-companion/embed/embed.html",
+            "url": "https://interactive.guim.co.uk/2016/06/brexit-companion/embed/embed.html",
             "overdue": "3H"
         },
         "TEST": {
-            "url": "https://interactive.guim.co.uk/testing/2016/05/brexit-companion/embed/embed.html",
+            "url": "https://interactive.guim.co.uk/testing/2016/06/brexit-companion/embed/embed.html",
             "overdue": "4M"
         }
     }
