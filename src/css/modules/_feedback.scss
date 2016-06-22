@@ -23,7 +23,6 @@
     }
 }
 .explainer__button--dislike {
-    margin-left: 3px;
     svg {
         transform: rotate(180deg);
     }
@@ -39,8 +38,18 @@
     @include fs-textSans(2);
     margin-top: $baseline;
     text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .explainer--nav-controls & {
+        padding: 0 20px;
+    }
+}
+.explainer__feedback-buttons {
+    flex: 0 0 auto;
 }
 .explainer__feedback-question,
 .explainer__feedback-answer {
-    padding-right: $gutter / 2;
+    padding-right: $gutter;
 }
