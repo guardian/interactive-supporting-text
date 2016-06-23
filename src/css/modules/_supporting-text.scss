@@ -35,3 +35,9 @@
     margin: 0 0 $baseline/2 0;
     font-weight: bold;
 }
+.supporting-text__footer {
+    @include fs-textSans(4);
+    margin: 0 0 $baseline/2 0;
+    color: #ffffff;
+    text-decoration: none;
+}

@@ -3,10 +3,7 @@
 @import "palette";
 @import "normalize";
 @import "mq";
-@import "mixins/buttons";
-@import "mixins/clearfix";
-@import "mixins/verticallyCenter";
-@import "modules/explainer";
+@import "modules/supporting-text";
 
 @include mq-add-breakpoint(embedded-wide, 465px);
 
