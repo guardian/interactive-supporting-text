@@ -34,6 +34,10 @@ a {
     color: colour(news-support-1);
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 a, button {
     &:hover {
         cursor: pointer;
