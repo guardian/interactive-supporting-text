@@ -1,4 +1,4 @@
-.explainer {
+.supporting-text {
     margin: $baseline*1.5 0;
     padding: $baseline/2 $gutter/2;
     background-color: colour(news-main-1);
@@ -25,12 +25,12 @@
     }
 }
 
-.explainer__header {
+.supporting-text__header {
     @include fs-header(3);
     min-height: $baseline * 2;
     padding-bottom: $baseline * 1.5;
 }
-.explainer__content {
+.supporting-text__content {
     @include fs-textSans(3);
     margin: 0 0 $baseline/2 0;
     font-weight: bold;

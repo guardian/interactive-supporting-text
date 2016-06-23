@@ -7,13 +7,6 @@
 @import "mixins/clearfix";
 @import "mixins/verticallyCenter";
 @import "modules/explainer";
-@import "modules/feedback";
-@import "modules/navControls";
-@import "modules/expandable";
-@import "modules/slider";
-@import "modules/carousel";
-@import "modules/twoSided";
-@import "modules/catchMeUp";
 
 @include mq-add-breakpoint(embedded-wide, 465px);
 

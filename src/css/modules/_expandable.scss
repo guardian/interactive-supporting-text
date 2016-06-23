@@ -1,9 +1,0 @@
-.explainer__read-more {
-    @include fs-textSans(2);
-    font-weight: 400;
-    text-decoration: none;
-
-    &:hover {
-        border-bottom: 1px solid colour(news-support-1);
-    }
-}
