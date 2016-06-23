@@ -4,7 +4,7 @@ import q from './lib/query';
 function bindEventHandlers() {
     q('.js-feedback').forEach(el => el.addEventListener('click', ev => {
         const feedbackButton = ev.currentTarget;
-        const feedback = feedbackButton.parentNode;
+        const feedback = feedbackButton.closest('.js-feedback-container');
         const surveyHref = feedbackButton.getAttribute('data-survey-href');
 
         feedback.innerHTML = thankYouHTML.replace(/%surveyHref%/g, surveyHref);

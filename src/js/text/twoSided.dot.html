@@ -1,14 +1,16 @@
 <div class="explainer explainer--slider">
     <div class="explainer__slider-wrapper">
         <div class="explainer__slider js-slider">
-            <div class="explainer__content explainer__slider__item explainer__two-sided__item">
-                <h1 class="explainer__header">
-                    {{=it.data.answer1Title}}
-                </h1>
-                <p>
-                    {{=it.data.answer1Body}}
-                </p>
-                <div class="explainer__feedback">
+            <div class="explainer__slider__item explainer__two-sided__item">
+                <div class="explainer__content">
+                    <h1 class="explainer__header">
+                        {{=it.data.answer1Title}}
+                    </h1>
+                    <p>
+                        {{=it.data.answer1Body}}
+                    </p>
+                </div>
+                <div class="explainer__feedback js-feedback-container">
                     {{#def.feedback}}
                 </div>
             </div>
@@ -37,14 +39,16 @@
                     </a>
                 </div>
             </div>
-            <div class="explainer__content explainer__slider__item explainer__two-sided__item">
-                <h1 class="explainer__header">
-                    {{=it.data.answer2Title}}
-                </h1>
-                <p>
-                    {{=it.data.answer2Body}}
-                </p>
-                <div class="explainer__feedback">
+            <div class="explainer__slider__item explainer__two-sided__item">
+                <div class="explainer__content">
+                    <h1 class="explainer__header">
+                        {{=it.data.answer2Title}}
+                    </h1>
+                    <p>
+                        {{=it.data.answer2Body}}
+                    </p>
+                </div>
+                <div class="explainer__feedback js-feedback-container">
                     {{#def.feedback}}
                 </div>
             </div>
